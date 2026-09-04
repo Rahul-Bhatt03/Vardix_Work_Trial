@@ -7,11 +7,13 @@ import type { AddressValue } from "../model/types.js";
 // Postal code is always "NNN NN" (5 digits, space after 3rd). Street lines
 // commonly end in -gatan, -vägen, -torg, -gränd, -plan, -allé, but we do
 // not require that suffix since many street names do not follow it
-// (numbers, person names, etc.) — the postal code is the more reliable anchor.
+// (numbers, person names, etc.) — the postal code is the more reliable
+// anchor.
 
 const POSTAL_CODE_PATTERN = /\b(\d{3})\s?(\d{2})\s+([A-ZÅÄÖ][a-zåäö]+(?:[- ][A-ZÅÄÖ][a-zåäö]+)*)/g;
 
-// A street line: starts with a capitalized word, ends with a house number (possibly with a letter suffix like "12A" or a range "12-14").
+// A street line: starts with a capitalized word, ends with a house number
+// (possibly with a letter suffix like "12A" or a range "12-14").
 const STREET_LINE_PATTERN = /\b([A-ZÅÄÖ][a-zåäö]+(?:s?(?:gatan|vägen|torg|gränd|plan|allé|stigen|backe))?(?:\s[A-ZÅÄÖ][a-zåäö]+)*)\s+(\d{1,3}\s?[A-Za-z]?(?:-\d{1,3}[A-Za-z]?)?)\b/;
 
 export function extractAddressCandidates(text: string): AddressValue[] {

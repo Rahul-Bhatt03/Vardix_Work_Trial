@@ -1,13 +1,15 @@
 import type { OpeningHoursInterval, OpeningHoursValue } from "../model/types.js";
 
 // Swedish opening hours show up in at least these shapes on real clinic
+// sites (see test/fixtures/html for captured real-world examples):
+//
 //   Mån-Fre: 08:00-17:00
 //   Måndag–torsdag 8.00-17.00, fredag 8.00-15.00
 //   Mån, Ons, Fre 09:00-12:00 och 13:00-18:00   (split by lunch)
 //   Tisdag stängt
 //   Lunchstängt 12:00-13:00
 //   Vardagar 08-17
-
+//
 // This parser is deliberately a best-effort structural parser, not a full
 // natural-language understander. It handles day-range expansion, day
 // lists, multiple intervals per day (lunch splits), "stängt", and the
