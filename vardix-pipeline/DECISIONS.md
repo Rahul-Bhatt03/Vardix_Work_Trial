@@ -15,3 +15,14 @@ We do not use a database.
 Reason:
 The assessment requires a one-command data pipeline.
 The input and output are file-based.
+
+
+## Decision 003 - Robots.txt Failure Handling
+
+We use a fail-open approach when `robots.txt` cannot be retrieved.
+
+If the file is missing or the request fails due to a network error or server error, the pipeline continues with caution instead of blocking the source.
+
+Explicit `Disallow` rules are always respected.
+
+This prevents temporary robots.txt failures from stopping the entire pipeline. Skipped sources and fetch failures are still recorded.
