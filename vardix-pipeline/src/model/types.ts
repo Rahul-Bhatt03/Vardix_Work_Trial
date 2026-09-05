@@ -72,6 +72,7 @@ export interface ResolvedField<T> {
   confidence: number;
   /** True when two or more sources gave materially different values. */
   conflict: boolean;
+  conflictCategory?: "representation_difference" | "source_disagreement" | "identity_mismatch" | "extraction_error" | "stale_source";
   /** Human-readable explanation of how the value was chosen. Required when conflict is true. */
   resolutionNote?: string;
   evidence: FieldEvidence<T>[];

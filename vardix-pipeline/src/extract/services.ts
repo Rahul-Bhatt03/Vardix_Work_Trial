@@ -40,9 +40,11 @@ export function matchServices(text: string, segment: string): { canonical: strin
     for (const variant of entry.variants) {
       const m = text.match(variant);
       if (m) {
+        const start = Math.max(0, (m.index ?? 0) - 80);
+        const end = Math.min(text.length, (m.index ?? 0) + m[0].length + 40);
+        const beforeMatch = text.slice(start, m.index ?? 0);
+        if (/(?:\b(?:inte|ingen|inget|inga|ej|saknar)\b|\b(?:erbjuder|har)\s+inte\b)[^.!?]{0,60}$/i.test(beforeMatch)) continue;
         if (!found.has(entry.canonical)) {
-          const start = Math.max(0, (m.index ?? 0) - 20);
-          const end = Math.min(text.length, (m.index ?? 0) + m[0].length + 20);
           found.set(entry.canonical, text.slice(start, end).trim());
         }
         break;

@@ -37,3 +37,27 @@ A clinic providing dental care does not prove subsidy participation.
 The subsidy extractor therefore looks for explicit subsidy-related terms or statements in the source text.
 
 If the source does not provide sufficient evidence, the pipeline does not guess. It records the field as unconfirmed or unknown based on source availability.
+
+
+## Dependencies 004
+
+Kept deliberately small and each individually justified: `csv-parse`
+(CSV parsing), `cheerio` (HTML parsing/traversal), `robots-parser`
+(robots.txt),
+`tsx`/`typescript`/`vitest` (dev tooling). No dependency was added
+without a specific line of code that needed it.
+
+
+## Testing philosophy 005
+
+Every extractor and source has tests written against messy,
+real-world-shaped input — including, wherever this session could obtain
+it, genuinely fetched real Swedish clinic data — not just clean
+happy-path strings. This caught real bugs before they reached even the
+gold-set stage: a newline-collapsing bug in opening-hours parsing, a
+greedy address regex, a missing space variant in the service vocabulary,
+a stale import path, and (found only once real gold-set data was run
+through the pipeline) a phone-normalization double-count and an
+all-caps-city address bug. The volume of real bugs caught this way is
+itself evidence for testing against real content rather than only
+synthetic fixtures.

@@ -23,6 +23,7 @@ export interface QualityReportField {
   nullCount: number;
   conflictCount: number;
   averageConfidence: number;
+  sourceDisagreementCount: number;
 }
 
 export interface QualityReport {
@@ -59,6 +60,7 @@ export function buildQualityReport(clinics: ResolvedClinic[]): QualityReport {
     let nullCount = 0;
     let conflictCount = 0;
     let confidenceSum = 0;
+    let sourceDisagreementCount = 0;
 
     for (const clinic of clinics) {
       const f = clinic.fields[field];
@@ -66,6 +68,7 @@ export function buildQualityReport(clinics: ResolvedClinic[]): QualityReport {
       if (isNull) nullCount++;
       else resolvedCount++;
       if (f.conflict) conflictCount++;
+      if (f.conflictCategory === "source_disagreement") sourceDisagreementCount++;
       confidenceSum += f.confidence;
     }
 
@@ -75,6 +78,7 @@ export function buildQualityReport(clinics: ResolvedClinic[]): QualityReport {
       nullCount,
       conflictCount,
       averageConfidence: clinics.length > 0 ? Number((confidenceSum / clinics.length).toFixed(3)) : 0,
+      sourceDisagreementCount,
     };
   });
 

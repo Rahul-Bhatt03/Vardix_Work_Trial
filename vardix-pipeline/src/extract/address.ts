@@ -10,7 +10,7 @@ import type { AddressValue } from "../model/types.js";
 // (numbers, person names, etc.) — the postal code is the more reliable
 // anchor.
 
-const POSTAL_CODE_PATTERN = /\b(\d{3})\s?(\d{2})\s+([A-ZÅÄÖ][a-zåäö]+(?:[- ][A-ZÅÄÖ][a-zåäö]+)*)/g;
+const POSTAL_CODE_PATTERN = /\b(\d{3})\s?(\d{2})\s+([A-ZÅÄÖ][A-ZÅÄÖa-zåäö-]*(?:\s+[A-ZÅÄÖ][A-ZÅÄÖa-zåäö-]*)*)/g;
 
 // A street line: starts with a capitalized word, ends with a house number
 // (possibly with a letter suffix like "12A" or a range "12-14").

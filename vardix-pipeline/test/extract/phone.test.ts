@@ -17,6 +17,16 @@ describe("extractPhoneCandidates", () => {
     expect(c.some((x) => x.normalized.startsWith("+4631"))).toBe(true);
   });
 
+  it("parses an unspaced national number without truncating the subscriber", () => {
+    const c = extractPhoneCandidates("08-660 62 94");
+    expect(c[0]?.normalized).toBe("+4686606294");
+  });
+
+  it("parses a tel link value in international form", () => {
+    const c = extractPhoneCandidates("+4686606294");
+    expect(c[0]?.normalized).toBe("+4686606294");
+  });
+
   it("does not treat a Swedish org number as a phone number", () => {
     const c = extractPhoneCandidates("Org.nr: 556680-6351");
     // 556680-6351 has a 10-digit shape but as a "phone" the trunk-prefix

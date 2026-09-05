@@ -44,8 +44,8 @@ function titleCase(word: string): string {
   return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
 }
 
-export function guess1177Url(clinic: SeedClinic): string {
-  const nameWords = toSlugWords(clinic.name).map(titleCase);
+function guess1177UrlForName(clinic: SeedClinic, name: string): string {
+  const nameWords = toSlugWords(name).map(titleCase);
   const citySlug = toSlugWords(clinic.city).map(titleCase);
   // Avoid duplicating the city if it's already the last word(s) of the name.
   const nameLower = nameWords.map((w) => w.toLowerCase());
@@ -53,6 +53,10 @@ export function guess1177Url(clinic: SeedClinic): string {
   const alreadyIncludesCity = cityLower.length > 0 && nameLower.slice(-cityLower.length).join("-") === cityLower.join("-");
   const words = alreadyIncludesCity ? nameWords : [...nameWords, ...citySlug];
   return `https://www.1177.se/hitta-vard/kontaktkort/${words.join("-")}/`;
+}
+
+export function guess1177Url(clinic: SeedClinic): string {
+  return guess1177UrlForName(clinic, clinic.name);
 }
 
 /** Rough token-overlap similarity between the fetched page's own heading and the seed clinic's name+city. Not a fuzzy-match library — deliberately simple and auditable. */
@@ -89,7 +93,12 @@ export class Registry1177Source implements Source {
   readonly sourceType = "national_health_portal" as const;
 
   discover(clinic: SeedClinic): string[] {
-    return [guess1177Url(clinic)];
+    const names = [
+      clinic.name,
+      clinic.name.replace(/\s*-\s*(?:tdl|tandläkare|dr\.?|doktor)\b.*$/i, ""),
+      clinic.name.replace(/\s+AB$/i, ""),
+    ];
+    return [...new Set(names.map((name) => guess1177UrlForName(clinic, name)))];
   }
 
   extract(clinic: SeedClinic, fetched: Extract<FetchOutcome, { ok: true }>): RawEvidence {

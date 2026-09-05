@@ -53,6 +53,7 @@ export function resolveField<T>(evidence: FieldEvidence<T>[], opts: ResolveOptio
     value: best.value,
     confidence: best.score,
     conflict,
+    conflictCategory: conflict ? "source_disagreement" : undefined,
     resolutionNote,
     evidence,
   };

@@ -54,12 +54,53 @@ function findHoursHeadingBlock($: cheerio.CheerioAPI): string | null {
   return text || null;
 }
 
+function jsonLdObjects($: cheerio.CheerioAPI): Record<string, unknown>[] {
+  const objects: Record<string, unknown>[] = [];
+  $("script[type='application/ld+json']").each((_, el) => {
+    try {
+      const parsed = JSON.parse($(el).text()) as unknown;
+      const values = Array.isArray(parsed) ? parsed : [parsed];
+      for (const value of values) if (value && typeof value === "object") objects.push(value as Record<string, unknown>);
+    } catch {
+      // Ignore malformed third-party JSON-LD.
+    }
+  });
+  return objects;
+}
+
+function structuredName($: cheerio.CheerioAPI): { value: string; method: string } | null {
+  for (const object of jsonLdObjects($)) {
+    const type = object["@type"];
+    if (typeof object.name === "string" && (type === "Organization" || type === "LocalBusiness" || type === "Dentist" || type === "MedicalBusiness")) {
+      return { value: object.name.trim(), method: "json-ld:organization-name" };
+    }
+  }
+  const siteName = $("meta[property='og:site_name'], meta[name='application-name']").first().attr("content")?.trim();
+  return siteName ? { value: siteName, method: "meta:site-name" } : null;
+}
+
+function structuredAddress($: cheerio.CheerioAPI): string | null {
+  for (const object of jsonLdObjects($)) {
+    const address = object.address;
+    if (address && typeof address === "object") {
+      const value = address as Record<string, unknown>;
+      const line = [value.streetAddress, value.postalCode, value.addressLocality]
+        .filter((part): part is string => typeof part === "string")
+        .join(", ");
+      if (line) return line;
+    }
+  }
+  return $("address").first().text().replace(/\s+/g, " ").trim() || null;
+}
+
 export class WebsiteSource implements Source {
   readonly name = "clinic_website";
   readonly sourceType = "clinic_website" as const;
 
   discover(clinic: SeedClinic): string[] {
-    return [clinic.website];
+    const base = clinic.website.replace(/\/+$/, "");
+    const paths = ["/kontakt", "/om-oss", "/oppettider", "/boka"];
+    return [clinic.website, ...paths.map((path) => `${base}${path}`)];
   }
 
   extract(clinic: SeedClinic, fetched: Extract<FetchOutcome, { ok: true }>): RawEvidence {
@@ -68,21 +109,21 @@ export class WebsiteSource implements Source {
     const now = new Date().toISOString();
     const evidence: RawEvidence = {};
 
-    // --- Canonical name: prefer <title>, fall back to first <h1>. Both are
-    // weak evidence (titles often carry taglines) so confidence is modest.
+    // --- Canonical name: structured provider data and page content beat SEO titles.
     const title = $("title").first().text().trim();
     const h1 = $("h1").first().text().trim();
-    const nameGuess = title || h1;
+    const structured = structuredName($);
+    const nameGuess = structured?.value || h1 || title;
     if (nameGuess) {
       evidence.canonicalName = [
         {
           value: nameGuess,
           sourceUrl: fetched.url,
           sourceType: this.sourceType,
-          confidence: title ? 0.5 : 0.55,
+          confidence: structured ? 0.85 : h1 ? 0.7 : 0.4,
           evidenceText: nameGuess,
           retrievedAt: now,
-          extractionMethod: title ? "dom:title" : "dom:h1",
+          extractionMethod: structured?.method ?? (h1 ? "dom:h1" : "dom:title"),
         },
       ];
     }
@@ -124,7 +165,7 @@ export class WebsiteSource implements Source {
     }
 
     // --- Address
-    const addressCandidates = extractAddressCandidates(bodyText);
+    const addressCandidates = extractAddressCandidates(structuredAddress($) ?? bodyText);
     if (addressCandidates.length > 0) {
       evidence.visitingAddress = [
         {

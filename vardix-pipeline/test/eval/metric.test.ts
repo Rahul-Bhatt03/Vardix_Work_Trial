@@ -179,4 +179,30 @@ describe("runGoldSetEvaluation — unmatched gold clinics", () => {
     expect(report.unmatchedGoldClinicIds).toEqual(["not-in-pipeline-output"]);
     expect(report.matchedClinics).toBe(0);
   });
+
+  it("matches a gold clinic by its labelled website when the seed name changed", () => {
+    const gold = [goldRow({ clinicId: "old-name--stockholm", clinicName: "A-Dental AB, Stockholm", labelledFrom: "https://adental.se/kontakt" })];
+    const actual = [
+      resolvedRow("a-dental-ab-tdl-anna-gawska-ostermalm--ostermalm", {
+        canonicalName: { value: "A-Dental AB", confidence: 0.8, conflict: false, evidence: [] },
+      }),
+    ];
+    actual[0]!.seed.website = "https://adental.se";
+    const report = runGoldSetEvaluation(gold, actual);
+    expect(report.matchedClinics).toBe(1);
+    expect(report.identityDiagnostics[0]?.method).toBe("website_domain");
+  });
+
+  it("normalizes phone, organization number, and service labels", () => {
+    const gold = [goldRow({ orgNumber: "556565-5957", phone: "08-660 62 94", services: ["Implantat"] })];
+    const actual = [resolvedRow("c1", {
+      orgNumber: { value: "5565655957", confidence: 0.8, conflict: false, evidence: [] },
+      phone: { value: "+4686606294", confidence: 0.8, conflict: false, evidence: [] },
+      services: { value: ["implantat"], confidence: 0.8, conflict: false, evidence: [] },
+    })];
+    const report = runGoldSetEvaluation(gold, actual);
+    expect(report.perField.find((field) => field.field === "orgNumber")?.truePositive).toBe(1);
+    expect(report.perField.find((field) => field.field === "phone")?.truePositive).toBe(1);
+    expect(report.perField.find((field) => field.field === "services")?.truePositive).toBe(1);
+  });
 });

@@ -16,8 +16,7 @@ export interface PhoneCandidate {
 }
 
 // Area/prefix codes are 1-4 digits (e.g. 8 for Stockholm, 031 for Gothenburg, 010/013 non-geographic). We deliberately do not try to validate against the real Swedish numbering plan (out of scope) — we validate shape and length only, and rely on source diversity for confidence.
-const PHONE_PATTERN =
-  /(?:\+46|0046|0)\s?(\d{1,3})[\s\-.]?(\d{2,3})[\s\-.]?(\d{2,3})[\s\-.]?(\d{2})?(?:[\s\-.]?(\d{2}))?/g;
+const PHONE_PATTERN = /(?<!\d)(?:(?:\+46|0046)\s*\d{1,3}|0(?:10|7\d|[1-9]\d?))[\s().-]*\d(?:[\d\s().-]*\d)(?!\d)/g;
 
 function onlyDigits(s: string): string {
   return s.replace(/\D/g, "");

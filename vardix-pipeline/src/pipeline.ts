@@ -37,9 +37,12 @@ export async function processClinic(clinic: SeedClinic, opts: PipelineOptions): 
           continue; // try the next candidate URL from this source, if any
         }
         const evidence = source.extract(clinic, outcome);
+        if (source.sourceType === "national_health_portal" && Object.keys(evidence).length === 0) {
+          continue; // A 200 page can still be an unrelated registry record; try the next candidate.
+        }
         rawEvidenceList.push(evidence);
         succeeded = true;
-        break; // this source is done for this clinic
+        if (source.sourceType !== "clinic_website") break; // registry sources stop at their first verified page
       } catch (err) {
         // A source's extract() throwing (malformed HTML tripping up a
         // selector, etc.) must not take down the whole clinic, let alone

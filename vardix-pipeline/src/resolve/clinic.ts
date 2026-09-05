@@ -9,7 +9,7 @@ import type {
   ResolvedClinicFields,
 } from "../model/types.js";
 import type { RawEvidence } from "../sources/types.js";
-import { addressEquals, exactEquals, openingHoursEquals, servicesEquals, stringEquals } from "./equality.js";
+import { addressEquals, openingHoursEquals, organizationNumberEquals, phoneEquals, servicesEquals, stringEquals, urlEquals } from "./equality.js";
 import { resolveField } from "./resolver.js";
 import { resolveDentalSubsidy } from "./subsidy.js";
 
@@ -31,12 +31,12 @@ function collect<T>(rawEvidenceList: RawEvidence[], field: FieldName): FieldEvid
 export function resolveClinicFields(rawEvidenceList: RawEvidence[]): ResolvedClinicFields {
   return {
     canonicalName: resolveField(collect<string>(rawEvidenceList, "canonicalName"), { equals: stringEquals }),
-    orgNumber: resolveField(collect<string>(rawEvidenceList, "orgNumber"), { equals: exactEquals }),
+    orgNumber: resolveField(collect<string>(rawEvidenceList, "orgNumber"), { equals: organizationNumberEquals }),
     visitingAddress: resolveField<AddressValue>(collect(rawEvidenceList, "visitingAddress"), {
       equals: addressEquals,
       describe: (v) => v.raw,
     }),
-    phone: resolveField(collect<string>(rawEvidenceList, "phone"), { equals: exactEquals }),
+    phone: resolveField(collect<string>(rawEvidenceList, "phone"), { equals: phoneEquals }),
     email: resolveField(collect<string>(rawEvidenceList, "email"), { equals: stringEquals }),
     openingHours: resolveField<OpeningHoursValue>(collect(rawEvidenceList, "openingHours"), {
       equals: openingHoursEquals,
@@ -47,6 +47,6 @@ export function resolveClinicFields(rawEvidenceList: RawEvidence[]): ResolvedCli
       describe: (v) => v.join(", "),
     }),
     dentalSubsidy: resolveDentalSubsidy(collect<DentalSubsidyValue>(rawEvidenceList, "dentalSubsidy")),
-    bookingUrl: resolveField(collect<string>(rawEvidenceList, "bookingUrl"), { equals: exactEquals }),
+    bookingUrl: resolveField(collect<string>(rawEvidenceList, "bookingUrl"), { equals: urlEquals }),
   };
 }

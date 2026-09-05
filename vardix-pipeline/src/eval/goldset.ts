@@ -27,7 +27,7 @@ export interface GoldClinic {
   dentalSubsidy: "confirmed" | "not_found" | "conflicting" | "unknown" | null;
   bookingUrl: string | null;
   /** How/where the labeller verified this row. Required — an unlabelled source is not a real gold row. */
-  labelledFrom: string;
+  labelledFrom: string | string[];
   labelledAt: string;
   notes?: string;
 }

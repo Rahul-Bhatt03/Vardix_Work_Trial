@@ -36,4 +36,9 @@ describe("matchServices", () => {
     const rf = found.find((s) => s.canonical === "Rotfyllning");
     expect(rf?.evidenceText).toContain("rotfyllning");
   });
+
+  it("does not report explicitly excluded child dental care", () => {
+    const text = "Vi har inget avtal om barntandvård utan arbetar enbart med vuxna.";
+    expect(matchServices(text, "tandvard").map((s) => s.canonical)).not.toContain("Barn- och ungdomstandvård");
+  });
 });
