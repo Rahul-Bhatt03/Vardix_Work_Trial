@@ -6,8 +6,7 @@ export interface ServiceVocabularyEntry {
   canonical: string;
   variants: RegExp[];
 }
-
-// Common dental services and their Swedish variations.
+ 
 const TANDVARD_VOCAB: ServiceVocabularyEntry[] = [
   { canonical: "Allmän tandvård", variants: [/allmän\s*(?:tand)?vård/i, /allmäntandvård/i] },
   { canonical: "Akut tandvård", variants: [/akuttandvård/i, /akut\s+tandvård/i, /akuta\s+besvär/i] },
@@ -22,9 +21,7 @@ const TANDVARD_VOCAB: ServiceVocabularyEntry[] = [
   { canonical: "Sedering/Narkos", variants: [/sedering/i, /lustgas/i, /narkos/i, /tandvårdsrädsla/i] },
   { canonical: "Hygienist", variants: [/tandhygienist/i] },
 ];
-
-
-// Common skin services and their Swedish variations.
+ 
 const HUD_VOCAB: ServiceVocabularyEntry[] = [
   { canonical: "Hudcancerkontroll", variants: [/hudcancer/i, /modermärkeskontroll/i, /melanom/i] },
   { canonical: "Akne-behandling", variants: [/akne/i] },
@@ -34,20 +31,16 @@ const HUD_VOCAB: ServiceVocabularyEntry[] = [
   { canonical: "Allergiutredning", variants: [/allergitest/i, /allergiutredning/i] },
   { canonical: "Kirurgiskt hudingrepp", variants: [/hudkirurgi/i, /borttagning\s+av\s+(?:hudförändring|vårta)/i] },
 ];
-
+ 
 export function matchServices(text: string, segment: string): { canonical: string; evidenceText: string }[] {
-
-    // Use only the vocabulary that matches the clinic type.
   const vocab = segment === "hud" ? HUD_VOCAB : segment === "tandvard" ? TANDVARD_VOCAB : [...TANDVARD_VOCAB, ...HUD_VOCAB];
   const found = new Map<string, string>();
-
+ 
   for (const entry of vocab) {
     for (const variant of entry.variants) {
       const m = text.match(variant);
       if (m) {
-        // Keep only one result for each service.
         if (!found.has(entry.canonical)) {
-             // Keep nearby text as evidence for why the service was found.
           const start = Math.max(0, (m.index ?? 0) - 20);
           const end = Math.min(text.length, (m.index ?? 0) + m[0].length + 20);
           found.set(entry.canonical, text.slice(start, end).trim());
@@ -56,6 +49,6 @@ export function matchServices(text: string, segment: string): { canonical: strin
       }
     }
   }
-
+ 
   return Array.from(found.entries()).map(([canonical, evidenceText]) => ({ canonical, evidenceText }));
 }
