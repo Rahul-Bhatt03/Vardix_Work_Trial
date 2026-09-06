@@ -20,7 +20,7 @@ export interface GoldClinic {
   canonicalName: string | null;
   orgNumber: string | null; // normalized NNNNNN-NNNN
   visitingAddress: { postalCode: string; city: string } | null;
-  phone: string | null; // normalized +46...
+  phone: string | null; // labelled source representation; evaluator compares normalized forms
   email: string | null;
   openingHours: GoldOpeningHours | null;
   services: string[] | null; // canonical service names, from the same vocabulary as src/extract/services.ts where possible

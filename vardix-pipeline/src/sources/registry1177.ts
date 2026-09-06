@@ -132,19 +132,21 @@ export class Registry1177Source implements Source {
     ];
 
     // Phone: prefer an explicit tel: link, which is unambiguous.
-    const telHref = $('a[href^="tel:"]').first().attr("href");
+    const telLink = $('a[href^="tel:"]').first();
+    const telHref = telLink.attr("href");
+    const displayedPhone = telLink.text().trim();
     const phoneText = $("body").text();
-    const phoneCandidates = extractPhoneCandidates(telHref ? telHref.replace("tel:", "") : phoneText);
+    const phoneCandidates = extractPhoneCandidates(displayedPhone || (telHref ? telHref.replace(/^tel:/i, "") : phoneText));
     if (phoneCandidates.length > 0) {
       evidence.phone = [
         {
-          value: phoneCandidates[0]!.normalized,
+          value: phoneCandidates[0]!.raw,
           sourceUrl: fetched.url,
           sourceType: this.sourceType,
           confidence: telHref ? 0.9 : 0.6,
           evidenceText: phoneCandidates[0]!.raw,
           retrievedAt: now,
-          extractionMethod: telHref ? "tel-link" : "regex:phone",
+          extractionMethod: telHref ? "tel-link:display-or-target" : "regex:phone",
         },
       ];
     }

@@ -16,6 +16,8 @@ export interface BookingCandidate {
 const BOOKING_DOMAINS = [
   "bokadirekt.se",
   "boka.se",
+  "frenda.se",
+  "opusdentalonline.com",
   "vardplanering",
   "timma.se",
   "bokning",
@@ -26,7 +28,7 @@ const BOOKING_DOMAINS = [
 ];
 
 // These are words that indicate booking
-const BOOKING_WORDS = ["boka", "book", "tidsbokning", "boka tid", "boka online", "boka besök"];
+const BOOKING_WORDS = ["boka", "book", "appointment", "schedule", "tidsbokning", "boka tid", "boka online", "boka besök", "boka besok"];
 
 // This prevents obvious false positives.
 const REJECT_DOMAINS = ["facebook.com", "instagram.com", "linkedin.com", "twitter.com", "x.com", "youtube.com", "tiktok.com"];
@@ -42,6 +44,7 @@ export function scoreBookingCandidate(link: LinkCandidate): BookingCandidate | n
   const anchor = link.anchorText.trim().toLowerCase();
 
   if (REJECT_SCHEMES.some((s) => href.toLowerCase().startsWith(s))) return null;
+  if (href.toLowerCase().startsWith("javascript:")) return null;
 
   let host = "";
   try {
@@ -67,6 +70,14 @@ export function scoreBookingCandidate(link: LinkCandidate): BookingCandidate | n
     score += 1;
     reasons.push("URL path mentions booking");
   }
+  const path = (() => {
+    try {
+      return new URL(href, "https://placeholder.invalid").pathname.toLowerCase().replace(/\/+$/, "") || "/";
+    } catch {
+      return "";
+    }
+  })();
+  if (["/", "/kontakt", "/contact", "/om-oss", "/about", "/services"].includes(path) && score < 3) return null;
   if (GENERIC_WORDS.some((w) => anchor.includes(w)) && score === 0) {
     score -= 2;
     reasons.push("anchor text looks generic/navigational");

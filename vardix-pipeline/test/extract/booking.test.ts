@@ -23,8 +23,18 @@ describe("scoreBookingCandidate", () => {
     expect(r).toBeNull();
   });
 
+  it("rejects a generic contact destination even when its label says book", () => {
+    const r = scoreBookingCandidate({ href: "/kontakt", anchorText: "Boka" });
+    expect(r).toBeNull();
+  });
+
   it("rejects a bare homepage link with no booking words", () => {
     const r = scoreBookingCandidate({ href: "https://adental.se", anchorText: "Startsida" });
+    expect(r).toBeNull();
+  });
+
+  it("rejects a clinic homepage even when its anchor says book", () => {
+    const r = scoreBookingCandidate({ href: "https://clinic.example/#", anchorText: "Boka tid" });
     expect(r).toBeNull();
   });
 });

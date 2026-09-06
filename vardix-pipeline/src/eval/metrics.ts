@@ -1,6 +1,7 @@
 import type { ResolvedClinic } from "../model/types.js";
 import type { GoldClinic } from "./goldset.js";
 import { addressEquals, openingHoursEquals, stringEquals } from "../resolve/equality.js";
+import { normalizePhoneForComparison } from "../extract/phone.js";
 import { matchGoldClinic, normalizeDomain, normalizeOrganizationNumber } from "./identity.js";
 
 // Null-handling rule for scoring (see goldset.ts for the labelling-side
@@ -46,14 +47,6 @@ export interface GoldSetEvalReport {
   unmatchedGoldClinicIds: string[]; // gold clinics not present in pipeline output — reported, not silently skipped
   identityDiagnostics: { goldClinicId: string; matchedPipelineId?: string; method?: string; details: string }[];
   perField: FieldMetric[];
-}
-
-function normalizePhone(value: string): string {
-  const digits = value.replace(/\D/g, "");
-  if (digits.startsWith("0046")) return `+46${digits.slice(4)}`;
-  if (digits.startsWith("46") && digits.length >= 10) return `+${digits}`;
-  if (digits.startsWith("0")) return `+46${digits.slice(1)}`;
-  return value.trim();
 }
 
 function normalizeUrl(value: string): string {
@@ -162,7 +155,7 @@ export function runGoldSetEvaluation(goldSet: GoldClinic[], resolvedClinics: Res
     tally(scalarMatch(gold.orgNumber, actual.fields.orgNumber.value, (a, b) => normalizeOrganizationNumber(a) === normalizeOrganizationNumber(b)), metrics.orgNumber!);
 
     if (gold.phone !== null) metrics.phone!.goldCount++;
-    tally(scalarMatch(gold.phone, actual.fields.phone.value, (a, b) => normalizePhone(a) === normalizePhone(b)), metrics.phone!);
+    tally(scalarMatch(gold.phone, actual.fields.phone.value, (a, b) => normalizePhoneForComparison(a) === normalizePhoneForComparison(b)), metrics.phone!);
 
     if (gold.email !== null) metrics.email!.goldCount++;
     tally(scalarMatch(gold.email, actual.fields.email.value, stringEquals), metrics.email!);

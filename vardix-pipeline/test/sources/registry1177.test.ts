@@ -47,7 +47,7 @@ describe("Registry1177Source.extract", () => {
 
   it("extracts phone, hours, address, services and subsidy status from a matching real page", () => {
     const ev = source.extract(fjaras, fetched(FJARAS_HTML, guess1177Url(fjaras)));
-    expect(ev.phone?.[0]?.value).toBe("+46300543154");
+    expect(ev.phone?.[0]?.value).toBe("0300-54 31 54");
     expect(ev.visitingAddress?.[0]?.value).toMatchObject({ city: "Kungsbacka" });
     const hours = ev.openingHours?.[0]?.value as OpeningHoursValue | undefined;
     expect(hours?.byWeekday[1]).toEqual([{ opens: "08:00", closes: "17:00" }]);
@@ -60,6 +60,7 @@ describe("Registry1177Source.extract", () => {
     const hours = ev.openingHours?.[0]?.value as OpeningHoursValue | undefined;
     // Real data: Telefontider Monday is 08.00–18.00, Öppettider Monday is
     // 07.45–18.00. If the extractor grabbed the wrong table this would be 08:00.
+    expect(ev.phone?.[0]?.value).toBe("042-742 10");
     expect(hours?.byWeekday[1]).toEqual([{ opens: "07:45", closes: "18:00" }]);
     expect(hours?.byWeekday[3]).toEqual([{ opens: "07:30", closes: "13:00" }]);
   });

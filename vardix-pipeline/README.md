@@ -95,6 +95,27 @@ when each was fetched.
 
 ## Known limitations
 
+### Why Some Fields Remain Null
+
+Null values are intentional when the available source evidence is not
+specific enough to support a claim. The pipeline does not infer clinic
+hours from generic text such as "open every day", treat telephone hours
+as clinic hours, or use a contact/services page as a booking destination
+unless it contains an actual booking link.
+
+The previous completed 300-clinic output contained opening hours for
+80/300 clinics and booking URLs for 143/300 clinics. The other records
+were commonly affected by robots restrictions, 404s, timeouts, network
+errors, generic or variable-hours text, or booking widgets whose
+destination is created only after JavaScript executes. The HTTP crawler
+cannot reliably see client-side content without browser automation.
+
+These are baseline populated-record counts, not claims that the other
+clinics have no hours or booking capability. A fresh network-backed run
+with the current extractors is required before reporting post-fix
+coverage. Leaving a field null when evidence is missing is deliberate:
+a plausible but unsupported value would be worse than an honest gap.
+
 - **Organisation number is the weakest field** — neither source built
   reliably publishes it (1177.se never shows it; most clinic sites
   don't print it). A dedicated registry source is the clearest next
@@ -108,12 +129,12 @@ when each was fetched.
   way deliberately rather than risk fabricated labels. The remaining
   four rows are a known evidence gap, not fabricated placeholders. See
   `gold-set/README.md` for why and how to extend it.
-- **`WebsiteSource` only fetches the homepage**, not a `/kontakt` or
-  `/oppettider` subpage — likely costing recall on phone/hours for sites
-  that split content across pages.
- - session, so this path is validated against a fake provider only.
-- **The booking-link domain list is the least real-world-validated
-  extractor** — see `QUESTIONS.md`.
+- **Website discovery is intentionally bounded** — it checks the
+  homepage and likely contact/booking paths, plus static booking controls,
+  but cannot see URLs created only after JavaScript executes.
+- **Phone output is source-faithful** — E.164-like conversion is used for
+  comparison only, so consumers should not assume `phone.value` is always
+  normalized.
 
 See `DECISIONS.md` for the full reasoning and `AGENTS.md` for how to
 safely extend this project.

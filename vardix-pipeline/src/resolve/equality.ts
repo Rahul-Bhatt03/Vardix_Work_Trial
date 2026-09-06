@@ -1,4 +1,5 @@
 import type { AddressValue, OpeningHoursValue } from "../model/types.js";
+import { normalizePhoneForComparison } from "../extract/phone.js";
 
 export function stringEquals(a: string, b: string): boolean {
   const normalize = (value: string) => value.normalize("NFKD").replace(/[\u0300-\u036f]/g, "").trim().toLowerCase();
@@ -14,15 +15,7 @@ export function organizationNumberEquals(a: string, b: string): boolean {
 }
 
 export function phoneEquals(a: string, b: string): boolean {
-  const digits = (value: string) => value.replace(/\D/g, "");
-  const normalize = (value: string) => {
-    const number = digits(value);
-    if (number.startsWith("0046")) return `+46${number.slice(4)}`;
-    if (number.startsWith("0")) return `+46${number.slice(1)}`;
-    if (number.startsWith("46")) return `+${number}`;
-    return number;
-  };
-  return normalize(a) === normalize(b);
+  return normalizePhoneForComparison(a) === normalizePhoneForComparison(b);
 }
 
 export function urlEquals(a: string, b: string): boolean {

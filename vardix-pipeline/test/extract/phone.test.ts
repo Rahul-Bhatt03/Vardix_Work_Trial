@@ -27,6 +27,18 @@ describe("extractPhoneCandidates", () => {
     expect(c[0]?.normalized).toBe("+4686606294");
   });
 
+  it("preserves a bare local source value while exposing a comparison key", () => {
+    const c = extractPhoneCandidates("45110050");
+    expect(c[0]?.raw).toBe("45110050");
+    expect(c[0]?.normalized).toBe("+4645110050");
+  });
+
+  it("preserves source formatting for a displayed national number", () => {
+    const c = extractPhoneCandidates("08-123 456");
+    expect(c[0]?.raw).toBe("08-123 456");
+    expect(c[0]?.normalized).toBe("+468123456");
+  });
+
   it("does not treat a Swedish org number as a phone number", () => {
     const c = extractPhoneCandidates("Org.nr: 556680-6351");
     // 556680-6351 has a 10-digit shape but as a "phone" the trunk-prefix

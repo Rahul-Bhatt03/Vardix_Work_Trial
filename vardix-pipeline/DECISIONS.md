@@ -75,8 +75,9 @@ serialized and rate-limited.
 This trade-off favors respectful access to third-party websites,
 stable output ordering, simple failure isolation, and broader evidence
 coverage over maximum throughput. The website source currently fetches
-one homepage per clinic rather than probing several guessed subpages,
-which removes redundant traffic while keeping the documented scope.
+the homepage plus a small set of likely contact/booking paths rather than
+crawling the whole site, which balances booking coverage against request
+volume.
 
 Because the worker pool processes several clinics at the same time,
 console progress messages appear in completion order rather than strict
@@ -137,3 +138,53 @@ are not available to the current HTTP-only fetcher. The repository stores
 three HTML fixtures, which all have focused extraction coverage; the
 checked-in 300-clinic output predates this fix and must be regenerated in
 a network-capable environment before post-fix full-run coverage is claimed.
+
+
+## Decision 010 - Source-Faithful Phone Values
+
+Phone values in resolved output preserve the source representation. A
+displayed local value such as `45110050` remains `45110050`, and an
+explicit international value such as `+4645110050` remains unchanged.
+When a `tel:` link has both a display label and a target, the display
+label is preferred; the target is used only when no display value exists.
+
+Country-code conversion is used only for equality and evaluation so that
+`45110050`, `0451-10050`, and `+4645110050` can be compared as the same
+number without rewriting the evidence-backed output. The trade-off is
+that consumers must not assume `phone.value` is E.164.
+
+
+## Decision 011 - Booking Discovery Boundary
+
+The website source checks the homepage and a bounded set of likely
+booking/contact paths. On each fetched page it scores normal links,
+buttons, forms, iframes, data attributes, and static `onclick` URLs,
+including external providers such as Frenda and Opus Dental Online.
+
+Generic contact/services URLs, social links, phone/mail links, invalid
+JavaScript URLs, and bare mentions of booking without a destination remain
+excluded. The accepted limitation is that URLs created only after
+client-side JavaScript executes are not reliably discoverable by the
+HTTP-only crawler; browser automation would be a separate architectural
+decision.
+
+
+## Decision 012 - Honest Missing-Field Coverage
+
+The completed baseline run populated opening hours for 80 of 300 clinics
+and booking URLs for 143 of 300 clinics. We do not convert the remaining
+records into guesses merely to improve those percentages. A missing value
+is retained when raw HTTP responses contain no specific, reviewable
+schedule or booking destination.
+
+The accepted causes include robots or HTTP failures, timeouts, generic or
+variable-hours prose, and destinations generated only after client-side
+JavaScript runs. A contact page, services page, homepage, or text
+mentioning booking is not sufficient evidence by itself. The trade-off is
+lower recall in exchange for precision, source-faithful evidence, and
+defensible recruiter-facing results.
+
+The 80/300 and 143/300 figures are baseline output counts. Because the
+latest extractor changes have not yet been applied to a completed live
+300-clinic rerun, new post-fix coverage must be reported only after a
+network-capable run completes.

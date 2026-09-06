@@ -2,6 +2,8 @@ import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { WebsiteSource } from "../../src/sources/website.js";
 import type { SeedClinic } from "../../src/model/types.js";
+import { processClinic } from "../../src/pipeline.js";
+import { PoliteFetcher } from "../../src/sources/fetcher.js";
 
 const ALFA_HTML = readFileSync(new URL("../fixtures/html/website/alfa-tandvard-homepage.html", import.meta.url), "utf8");
 
@@ -34,6 +36,7 @@ describe("WebsiteSource opening hours", () => {
     });
     expect(hours?.evidenceText).toContain("Mån-Tors");
     expect(hours?.extractionMethod).toBe("dom:heading-block+parseOpeningHours");
+    expect(evidence.phone?.[0]?.value).toBe("0451-123 456");
   });
 
   it("prefers valid JSON-LD opening hours when visible text is absent", () => {
@@ -55,5 +58,48 @@ describe("WebsiteSource opening hours", () => {
     const hours = new WebsiteSource().extract(clinic, fetched(html)).openingHours?.[0];
     expect(hours?.extractionMethod).toBe("jsonld:openingHoursSpecification");
     expect(hours?.evidenceText).toContain("Monday");
+  });
+
+  it("discovers relevant internal booking pages after the homepage", () => {
+    expect(new WebsiteSource().discover(clinic)).toEqual([
+      "https://alfatandvard.se",
+      "https://alfatandvard.se/kontakt",
+      "https://alfatandvard.se/boka",
+      "https://alfatandvard.se/booking",
+      "https://alfatandvard.se/tidsbokning",
+    ]);
+  });
+
+  it("crawls an internal booking page when the homepage has no destination", async () => {
+    const fetchFn = async (input: string | URL | Request): Promise<Response> => {
+      const value = typeof input === "string" ? input : input instanceof URL ? input.toString() : input.url;
+      if (value.endsWith("/robots.txt")) return new Response("User-agent: *\n", { status: 200 });
+      if (value.endsWith("/boka")) return new Response('<html><body><a href="https://frenda.se/clinic/123">Boka tid</a></body></html>', { status: 200 });
+      return new Response("<html><body><h1>Alfa Tandvårdskliniken</h1></body></html>", { status: 200 });
+    };
+    const result = await processClinic(clinic, {
+      sources: [new WebsiteSource()],
+      fetcher: new PoliteFetcher({ fetchFn, minDelayPerHostMs: 0, maxRetries: 0 }),
+    });
+    expect(result.fields.bookingUrl.value).toBe("https://frenda.se/clinic/123");
+  });
+
+  it("finds external, button, onclick, and data-attribute booking destinations", () => {
+    const html = `<html><body>
+      <button data-booking-url="https://booking.frenda.se/clinic/123" aria-label="Boka besök">Boka besök</button>
+      <button onclick="window.location='/boka-tid'">Book appointment</button>
+      <div data-url="https://clinic.example/schedule" aria-label="Schedule appointment"></div>
+    </body></html>`;
+    const evidence = new WebsiteSource().extract(clinic, fetched(html));
+    expect(evidence.bookingUrl?.[0]?.value).toBe("https://booking.frenda.se/clinic/123");
+  });
+
+  it("does not turn generic or invalid links into booking URLs", () => {
+    const html = `<html><body>
+      <a href="/kontakt">Kontakt</a>
+      <a href="javascript:void(0)">Boka</a>
+      <a href="https://example.com/services">Services</a>
+    </body></html>`;
+    expect(new WebsiteSource().extract(clinic, fetched(html)).bookingUrl).toBeUndefined();
   });
 });

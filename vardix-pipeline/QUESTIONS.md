@@ -12,9 +12,11 @@
    reference to Försäkringskassan or ATB/STB be required, or is being an
    authorized dental-care provider enough?
 
-3. **Booking URLs** — should a booking field contain only a direct booking
-   URL, or is a clinic contact page acceptable when that page is where the
-   booking flow starts?
+3. **Booking URLs** — the pipeline now accepts direct internal or external
+   appointment destinations discovered from static HTML. Should a booking
+   field contain only a direct booking URL, or is a clinic contact page
+   acceptable when that page is where the booking flow starts? JavaScript-only
+   destinations remain outside the HTTP-only crawler.
 
 4. **Source freshness** — when sources disagree, how important is recency
    compared with source authority? For example, should a newer 1177 value

@@ -93,12 +93,51 @@ function structuredAddress($: cheerio.CheerioAPI): string | null {
   return $("address").first().text().replace(/\s+/g, " ").trim() || null;
 }
 
+function phoneInput($: cheerio.CheerioAPI, bodyText: string): { text: string; fromTelLink: boolean } {
+  const telLink = $('a[href^="tel:"]').first();
+  if (telLink.length > 0) {
+    const displayed = telLink.text().trim();
+    const target = telLink.attr("href")?.replace(/^tel:/i, "").trim() ?? "";
+    return { text: displayed || target, fromTelLink: true };
+  }
+  return { text: bodyText, fromTelLink: false };
+}
+
+function collectBookingLinks($: cheerio.CheerioAPI): LinkCandidate[] {
+  const links: LinkCandidate[] = [];
+  const add = (href: string | undefined, anchorText: string): void => {
+    if (href?.trim()) links.push({ href: href.trim(), anchorText: anchorText.trim() });
+  };
+  const context = (el: any): string => {
+    const node = $(el);
+    return [node.text(), node.attr("aria-label"), node.attr("title")].filter(Boolean).join(" ");
+  };
+
+  $("a[href],button,[data-href],[data-url],[data-booking-url],[data-appointment-url],[data-booking],[onclick],iframe[src],form[action]").each((_, el) => {
+    const node = $(el);
+    const text = context(el);
+    add(node.attr("href"), text);
+    add(node.attr("data-href"), text);
+    add(node.attr("data-url"), text);
+    add(node.attr("data-booking-url"), text);
+    add(node.attr("data-appointment-url"), text);
+    add(node.attr("data-booking"), text);
+    add(node.attr("src"), text);
+    add(node.attr("action"), text);
+
+    const onclick = node.attr("onclick") ?? "";
+    for (const match of onclick.matchAll(/["']((?:https?:\/\/|\/)[^"']+)["']/g)) add(match[1], text);
+  });
+  return links;
+}
+
 export class WebsiteSource implements Source {
   readonly name = "clinic_website";
   readonly sourceType = "clinic_website" as const;
 
   discover(clinic: SeedClinic): string[] {
-    return [clinic.website];
+    const base = clinic.website.replace(/\/+$/, "");
+    return [clinic.website, `${base}/kontakt`, `${base}/boka`, `${base}/booking`, `${base}/tidsbokning`];
   }
 
   extract(clinic: SeedClinic, fetched: Extract<FetchOutcome, { ok: true }>): RawEvidence {
@@ -127,18 +166,18 @@ export class WebsiteSource implements Source {
     }
 
     // --- Phone
-    const telHref = $('a[href^="tel:"]').first().attr("href");
-    const phoneCandidates = extractPhoneCandidates(telHref ? telHref.replace("tel:", "") : bodyText);
+    const phoneSource = phoneInput($, bodyText);
+    const phoneCandidates = extractPhoneCandidates(phoneSource.text);
     if (phoneCandidates.length > 0) {
       evidence.phone = [
         {
-          value: phoneCandidates[0]!.normalized,
+          value: phoneCandidates[0]!.raw,
           sourceUrl: fetched.url,
           sourceType: this.sourceType,
-          confidence: telHref ? 0.75 : 0.5,
+          confidence: phoneSource.fromTelLink ? 0.75 : 0.5,
           evidenceText: phoneCandidates[0]!.raw,
           retrievedAt: now,
-          extractionMethod: telHref ? "tel-link" : "regex:phone",
+          extractionMethod: phoneSource.fromTelLink ? "tel-link:display-or-target" : "regex:phone",
         },
       ];
     }
@@ -250,10 +289,7 @@ export class WebsiteSource implements Source {
     }
 
     // --- Booking link
-    const links: LinkCandidate[] = $("a[href]")
-      .toArray()
-      .map((el) => ({ href: $(el).attr("href") ?? "", anchorText: $(el).text().trim() }))
-      .filter((l) => l.href);
+    const links = collectBookingLinks($);
     const best = pickBestBookingLink(links);
     if (best) {
       let resolvedUrl = best.url;

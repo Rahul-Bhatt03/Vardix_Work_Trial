@@ -19,6 +19,23 @@ Gold matching now uses this general hierarchy: preserved seed ID, normalized org
 - The current field metrics are written to `output/eval-report.json` after each `npm run eval`.
 - A full 300-clinic rerun was attempted with bounded relevant website-page discovery. It reached the first clinics, but the restricted network environment made the network-backed run impractical to finish; the previous completed 300-clinic report remains in `output/quality-report.json` until a network-capable run is performed.
 
+## Coverage Interpretation
+
+The previous completed output reported opening hours for 80/300 clinics
+and booking URLs for 143/300 clinics. These are populated-record counts,
+not estimates that the remaining clinics lack those capabilities.
+
+A null value means the crawler did not obtain sufficiently specific,
+reviewable evidence from the available raw responses. Common causes are
+robots or HTTP failures, timeouts, generic text without fixed hours, and
+booking destinations generated only by client-side JavaScript.
+
+The pipeline deliberately accepts lower recall rather than inventing
+hours or treating a homepage, contact page, or services page as a booking
+URL. The cancelled subset run means no post-fix live coverage number is
+claimed here; the checked-in 300-clinic output predates the latest
+extractor changes.
+
 ## Evaluation limitations and remaining risk
 
 Unmatched gold clinics are now counted as false negatives for every
