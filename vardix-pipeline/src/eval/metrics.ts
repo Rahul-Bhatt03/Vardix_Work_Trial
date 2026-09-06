@@ -95,6 +95,35 @@ function emptyMetric(field: string): FieldMetric {
   return { field, truePositive: 0, falsePositive: 0, falseNegative: 0, trueNegative: 0, precision: 0, recall: 0, goldCount: 0 };
 }
 
+function recordUnmatchedGold(gold: GoldClinic, metrics: Record<string, FieldMetric>): void {
+  const scalarFields = ["canonicalName", "orgNumber", "phone", "email", "bookingUrl"] as const;
+  for (const field of scalarFields) {
+    if (gold[field] !== null) {
+      metrics[field]!.goldCount++;
+      metrics[field]!.falseNegative++;
+    }
+  }
+
+  if (gold.visitingAddress !== null) {
+    metrics.visitingAddress!.goldCount++;
+    metrics.visitingAddress!.falseNegative++;
+  }
+  if (gold.openingHours !== null) {
+    metrics.openingHours!.goldCount++;
+    metrics.openingHours!.falseNegative++;
+  }
+  if (gold.services !== null && gold.services.length > 0) {
+    metrics.services!.goldCount += gold.services.length;
+    metrics.services!.falseNegative += gold.services.length;
+  }
+
+  const subsidy = gold.dentalSubsidy === "unknown" ? null : gold.dentalSubsidy;
+  if (subsidy !== null) {
+    metrics.dentalSubsidy!.goldCount++;
+    metrics.dentalSubsidy!.falseNegative++;
+  }
+}
+
 export function runGoldSetEvaluation(goldSet: GoldClinic[], resolvedClinics: ResolvedClinic[]): GoldSetEvalReport {
   const metrics: Record<string, FieldMetric> = {
     canonicalName: emptyMetric("canonicalName"),
@@ -115,7 +144,10 @@ export function runGoldSetEvaluation(goldSet: GoldClinic[], resolvedClinics: Res
   for (const gold of goldSet) {
     const identity = matchGoldClinic(gold, resolvedClinics);
     if (!identity) {
+      // An unmatched gold clinic is a miss for every verified positive field.
+      // It must not disappear from recall merely because identity matching failed.
       unmatched.push(gold.clinicId);
+      recordUnmatchedGold(gold, metrics);
       identityDiagnostics.push({ goldClinicId: gold.clinicId, details: "No unique match by stable ID, organization number, labelled-source domain, or normalized name + city." });
       continue;
     }

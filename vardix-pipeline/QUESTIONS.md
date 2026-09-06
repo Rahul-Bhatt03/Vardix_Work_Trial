@@ -2,9 +2,10 @@
 
 ## Open questions
 
-1. **Organization numbers** — is the organization number expected to be
-   verified against an authoritative company registry, or is a matching value
-   from a clinic website / 1177 acceptable when the registry is unavailable?
+1. **Organization numbers** — the current pipeline has no authoritative
+   company-registry source and only accepts Luhn-valid values found in clinic
+   website text. Is that sufficient for the assignment, or should a registry
+   source be added? Luhn validity alone does not prove clinic ownership.
 
 2. **State dental subsidy** — what should count as sufficient evidence for
    "connected to the state dental subsidy"? For example, should an explicit

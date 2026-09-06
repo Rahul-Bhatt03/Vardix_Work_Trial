@@ -47,20 +47,33 @@ function sleep(ms: number): Promise<void> {
 export class PoliteFetcher {
   private readonly opts: Required<FetcherOptions>;
   private readonly lastRequestAtByHost = new Map<string, number>();
+  private readonly hostQueues = new Map<string, Promise<void>>();
 
   constructor(opts: FetcherOptions = {}) {
     this.opts = { ...DEFAULTS, ...opts };
   }
 
   private async waitForHostSlot(host: string): Promise<void> {
-    const last = this.lastRequestAtByHost.get(host);
-    const now = Date.now();
-    if (last !== undefined) {
-      const elapsed = now - last;
-      const remaining = this.opts.minDelayPerHostMs - elapsed;
-      if (remaining > 0) await sleep(remaining);
+    const previous = this.hostQueues.get(host) ?? Promise.resolve();
+    let release!: () => void;
+    const current = new Promise<void>((resolve) => {
+      release = resolve;
+    });
+    this.hostQueues.set(host, current);
+
+    await previous;
+    try {
+      const last = this.lastRequestAtByHost.get(host);
+      const now = Date.now();
+      if (last !== undefined) {
+        const elapsed = now - last;
+        const remaining = this.opts.minDelayPerHostMs - elapsed;
+        if (remaining > 0) await sleep(remaining);
+      }
+      this.lastRequestAtByHost.set(host, Date.now());
+    } finally {
+      release();
     }
-    this.lastRequestAtByHost.set(host, Date.now());
   }
 
   async fetch(clinicId: string, url: string, sourceType: SourceType): Promise<FetchOutcome> {

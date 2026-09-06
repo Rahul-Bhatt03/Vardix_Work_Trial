@@ -12,12 +12,31 @@ Gold matching now uses this general hierarchy: preserved seed ID, normalized org
 
 ## Current validation
 
-- `npm test`: 120 tests passed.
+- `npm test`: the complete automated suite passes; run the command for the current count.
 - `npm run build`: passed.
-- Gold identity evaluation: 26/26 rows matched in the current gold file.
+- The current evaluation report has 26 gold rows, 23 matched clinics, and 3
+	unmatched clinic IDs reported in `identityDiagnostics`.
 - The current field metrics are written to `output/eval-report.json` after each `npm run eval`.
 - A full 300-clinic rerun was attempted with bounded relevant website-page discovery. It reached the first clinics, but the restricted network environment made the network-backed run impractical to finish; the previous completed 300-clinic report remains in `output/quality-report.json` until a network-capable run is performed.
 
-## Remaining risk
+## Evaluation limitations and remaining risk
 
-The largest remaining accuracy risks are sparse organization-number and opening-hours coverage, source disagreement on canonical names and phones, and incomplete website-specific extraction. Gold rows with duplicate clinic IDs should be reviewed as a data-quality issue, but were not modified by the pipeline.
+Unmatched gold clinics are now counted as false negatives for every
+verified positive field, so recall cannot be inflated by failed identity
+matching. A missing pipeline record is not treated as a false positive or
+true negative because there is no actual value to compare.
+
+The gold set currently contains 26 clinics, while the brief asks for
+approximately 30. The four-row gap is disclosed rather than filled with
+unverified labels.
+
+The largest remaining accuracy risks are sparse organization-number and
+opening-hours coverage, source disagreement on canonical names and phones,
+and incomplete website-specific extraction. Gold rows with duplicate clinic
+IDs should be reviewed as a data-quality issue, but were not modified by the
+pipeline.
+
+Organization-number coverage remains weak because the pipeline has no
+authoritative company-registry source. It only accepts Luhn-valid numbers
+found in clinic website text; Luhn validation is a shape/checksum test, not
+proof that the number belongs to the clinic.

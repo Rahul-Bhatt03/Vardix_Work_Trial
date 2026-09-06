@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { parseOpeningHours } from "../../src/extract/hours.js";
+import { parseOpeningHours, parseStructuredOpeningHours } from "../../src/extract/hours.js";
 
 describe("parseOpeningHours", () => {
   it("parses a simple day-range with colon", () => {
@@ -63,5 +63,57 @@ describe("parseOpeningHours", () => {
     expect(r.value.byWeekday[6]).toEqual([]);
     expect(r.value.byWeekday[7]).toEqual([]);
     expect(r.hadUnparsedSegments).toBe(false);
+  });
+
+  it("parses compact adjacent weekday segments from rendered text", () => {
+    const r = parseOpeningHours("Måndag - Fredag: 08:00-18:00Lördag: 10:00-16:00Söndag: Stängt");
+    expect(r.value.byWeekday[1]).toEqual([{ opens: "08:00", closes: "18:00" }]);
+    expect(r.value.byWeekday[6]).toEqual([{ opens: "10:00", closes: "16:00" }]);
+    expect(r.value.byWeekday[7]).toEqual([]);
+  });
+
+  it("parses compact abbreviated Swedish segments with trailing prose", () => {
+    const r = parseOpeningHours("Mån – Tors : 9 – 17Fre : 9 – 15");
+    expect(r.value.byWeekday[1]).toEqual([{ opens: "09:00", closes: "17:00" }]);
+    expect(r.value.byWeekday[4]).toEqual([{ opens: "09:00", closes: "17:00" }]);
+    expect(r.value.byWeekday[5]).toEqual([{ opens: "09:00", closes: "15:00" }]);
+  });
+
+  it("parses English weekday abbreviations used by schema.org openingHours", () => {
+    const r = parseOpeningHours("Mo-Fr 08:00-17:00\nSa-Su closed");
+    expect(r.value.byWeekday[1]).toEqual([{ opens: "08:00", closes: "17:00" }]);
+    expect(r.value.byWeekday[6]).toEqual([]);
+    expect(r.value.byWeekday[7]).toEqual([]);
+  });
+
+  it("parses schema.org openingHours strings", () => {
+    const r = parseStructuredOpeningHours([{ openingHours: ["Mo-Fr 09:00-17:00", "Sa 10:00-13:00"] }]);
+    expect(r?.value.byWeekday[1]).toEqual([{ opens: "09:00", closes: "17:00" }]);
+    expect(r?.value.byWeekday[6]).toEqual([{ opens: "10:00", closes: "13:00" }]);
+    expect(r?.evidenceText).toContain("Mo-Fr");
+  });
+
+  it("parses schema.org openingHoursSpecification", () => {
+    const r = parseStructuredOpeningHours([
+      {
+        openingHoursSpecification: [
+          { dayOfWeek: ["https://schema.org/Monday", "https://schema.org/Tuesday"], opens: "08:00", closes: "17:00" },
+          { dayOfWeek: "https://schema.org/Friday", opens: "08.00", closes: "15.00" },
+        ],
+      },
+    ]);
+    expect(r?.value.byWeekday[1]).toEqual([{ opens: "08:00", closes: "17:00" }]);
+    expect(r?.value.byWeekday[5]).toEqual([{ opens: "08:00", closes: "15:00" }]);
+  });
+
+  it("returns null for missing or unusable structured hours", () => {
+    expect(parseStructuredOpeningHours([{}])).toBeNull();
+    expect(parseStructuredOpeningHours([{ openingHours: ["Call for opening hours"] }])).toBeNull();
+  });
+
+  it("keeps malformed hours as notes without inventing a schedule", () => {
+    const r = parseOpeningHours("Måndag öppet när det passar");
+    expect(Object.keys(r.value.byWeekday)).toHaveLength(0);
+    expect(r.value.notes).toContain("öppet när det passar");
   });
 });

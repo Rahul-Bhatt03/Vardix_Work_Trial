@@ -164,15 +164,16 @@ export class Registry1177Source implements Source {
         })
         .filter(Boolean)
         .join("\n");
-      if (hoursText) {
-        const parsed = parseOpeningHours(hoursText);
+      const fallbackHoursText = hoursText || hoursSection.text().replace(/\s+/g, " ").trim();
+      if (fallbackHoursText) {
+        const parsed = parseOpeningHours(fallbackHoursText);
         evidence.openingHours = [
           {
             value: parsed.value,
             sourceUrl: fetched.url,
             sourceType: this.sourceType,
             confidence: parsed.hadUnparsedSegments ? 0.6 : 0.85,
-            evidenceText: hoursText,
+            evidenceText: fallbackHoursText,
             retrievedAt: now,
             extractionMethod: "dom-section:Öppettider+parseOpeningHours",
           },

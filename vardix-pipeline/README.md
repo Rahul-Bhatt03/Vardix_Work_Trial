@@ -66,7 +66,7 @@ whether or not these are set. See `DECISIONS.md`, "LLM usage."
 ```
 npm run build       # compile src/
 npm run typecheck    # typecheck src/ + test/
-npm test             # run the test suite (145 tests)
+  npm test             # run the test suite
 npm run pipeline      # run the real pipeline against data/seed-clinics.csv -> output/
 npm run eval          # score output/clinics.json against gold-set/gold-clinics.json -> output/eval-report.json
 ```
@@ -99,8 +99,14 @@ when each was fetched.
   reliably publishes it (1177.se never shows it; most clinic sites
   don't print it). A dedicated registry source is the clearest next
   step. See `DECISIONS.md`.
-- **Gold set is 4 clinics, not the ~30 the brief asks for** — built this
-  way deliberately rather than risk fabricated labels. See
+- **Opening-hours coverage depends on raw HTML availability** — the
+  parser now handles compact Swedish text, English/schema.org formats,
+  and JSON-LD, but hours rendered only after client-side JavaScript are
+  unavailable to the HTTP fetcher. A fresh network-backed run is needed
+  to measure post-fix coverage across all 300 clinics.
+- **Gold set is 26 clinics, not the ~30 the brief asks for** — built this
+  way deliberately rather than risk fabricated labels. The remaining
+  four rows are a known evidence gap, not fabricated placeholders. See
   `gold-set/README.md` for why and how to extend it.
 - **`WebsiteSource` only fetches the homepage**, not a `/kontakt` or
   `/oppettider` subpage — likely costing recall on phone/hours for sites

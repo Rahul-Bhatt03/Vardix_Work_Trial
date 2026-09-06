@@ -23,22 +23,54 @@ type Weekday = 1 | 2 | 3 | 4 | 5 | 6 | 7;
 const DAY_NAMES: Record<string, Weekday> = {
   måndag: 1,
   mån: 1,
+  monday: 1,
+  mon: 1,
+  mo: 1,
   tisdag: 2,
   tis: 2,
+  tuesday: 2,
+  tue: 2,
+  tu: 2,
   onsdag: 3,
   ons: 3,
+  wednesday: 3,
+  wed: 3,
+  we: 3,
   torsdag: 4,
   tor: 4,
   tors: 4,
+  thursday: 4,
+  thu: 4,
+  thur: 4,
+  thurs: 4,
+  th: 4,
   fredag: 5,
   fre: 5,
+  friday: 5,
+  fri: 5,
+  fr: 5,
   lördag: 6,
   lör: 6,
+  saturday: 6,
+  sat: 6,
+  sa: 6,
   söndag: 7,
   sön: 7,
+  sunday: 7,
+  sun: 7,
+  su: 7,
 };
 
 const WEEKDAY_ORDER: Weekday[] = [1, 2, 3, 4, 5, 6, 7];
+const WEEKDAY_LABELS: Record<Weekday, string> = {
+  1: "Monday",
+  2: "Tuesday",
+  3: "Wednesday",
+  4: "Thursday",
+  5: "Friday",
+  6: "Saturday",
+  7: "Sunday",
+};
 
 function normalizeText(raw: string): string {
   return raw
@@ -86,7 +118,7 @@ function parseDaySpec(spec: string): Weekday[] | null {
   if (range) return range;
 
   const items = spec
-    .split(/\s*(?:,|och)\s*/)
+    .split(/\s*(?:,|och|&)\s*/)
     .map((s) => s.trim())
     .filter(Boolean);
   if (items.length === 0) return null;
@@ -137,6 +169,23 @@ const CLOSED_WORDS = ["stängt", "stängd", "closed"];
 // list ("Mån, Ons, Fre 09:00-18:00") stay intact as the day part.
 const REST_START_PATTERN = new RegExp(`(?:${CLOSED_WORDS.join("|")}|\\d{1,2}(?:[.:]\\d{2})?\\s*-)`, "i");
 
+const DAY_WORD_PATTERN = Object.keys(DAY_NAMES)
+  .sort((a, b) => b.length - a.length)
+  .map((day) => day.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
+  .join("|");
+const NEXT_SEGMENT_PATTERN = new RegExp(
+  `(\\d{1,2}(?:[.:]\\d{2})?\\s*-\\s*\\d{1,2}(?:[.:]\\d{2})?|${CLOSED_WORDS.join("|")})\\s*(?=(?:${DAY_WORD_PATTERN})(?:\\b|\\s|:))`,
+  "gi",
+);
+
+function splitCompactSegments(text: string): string[] {
+  return text
+    .replace(NEXT_SEGMENT_PATTERN, "$1\n")
+    .split(/\n|\||;/)
+    .map((segment) => segment.trim())
+    .filter(Boolean);
+}
+
 function parseSegment(segment: string): { days: Weekday[]; intervals: OpeningHoursInterval[] | "closed" } | null {
   const s = segment.trim();
   if (!s) return null;
@@ -156,15 +205,23 @@ function parseSegment(segment: string): { days: Weekday[]; intervals: OpeningHou
     return { days, intervals: "closed" };
   }
 
-  const intervals = parseTimeSpec(restPart);
+  const intervals = parseTimeSpec(restPart) ?? parseLeadingTimeSpec(restPart);
   if (!intervals) return null;
   return { days, intervals };
+}
+
+function parseLeadingTimeSpec(spec: string): OpeningHoursInterval[] | null {
+  const time = `(\\d{1,2}(?:[.:]\\d{2})?)\\s*-\\s*(\\d{1,2}(?:[.:]\\d{2})?)`;
+  const match = spec.match(new RegExp(`^${time}(?:\\s*(?:och|,)\\s*${time})*`, "i"));
+  return match?.[0] ? parseTimeSpec(match[0]) : null;
 }
 
 export interface HoursParseResult {
   value: OpeningHoursValue;
   /** True if at least one segment could not be structurally parsed and was kept only as a note. */
   hadUnparsedSegments: boolean;
+  /** Compact source text suitable for evidence when hours came from structured data. */
+  evidenceText?: string;
 }
 
 /**
@@ -178,10 +235,7 @@ export function parseOpeningHours(rawBlock: string): HoursParseResult {
   // Split on line breaks, and on ". " boundaries that look like new
   // day-segments (capital day name follows), since some sites put
   // everything in one paragraph.
-  const segments = text
-    .split(/\n|(?<=\d)\.\s+(?=[A-ZÅÄÖ])|(?<=stängt)\.\s+(?=[A-ZÅÄÖ])/i)
-    .map((s) => s.trim())
-    .filter(Boolean);
+  const segments = splitCompactSegments(text);
 
   const byWeekday: OpeningHoursValue["byWeekday"] = {};
   const unparsed: string[] = [];
@@ -204,4 +258,57 @@ export function parseOpeningHours(rawBlock: string): HoursParseResult {
     },
     hadUnparsedSegments: unparsed.length > 0,
   };
+}
+
+function structuredDay(value: unknown): Weekday | null {
+  if (typeof value !== "string") return null;
+  const token = value.toLowerCase().split(/[\/#]/).pop()?.replace(/[^a-zåäö]/g, "") ?? "";
+  return DAY_NAMES[token] ?? null;
+}
+
+function structuredTime(value: unknown): string | null {
+  return typeof value === "string" ? parseTime(value.trim()) : null;
+}
+
+/** Parses schema.org opening-hours fields from JSON-LD objects. */
+export function parseStructuredOpeningHours(objects: Record<string, unknown>[]): HoursParseResult | null {
+  const byWeekday: OpeningHoursValue["byWeekday"] = {};
+  const evidenceLines: string[] = [];
+  let sawStructuredHours = false;
+
+  for (const object of objects) {
+    const specifications = object.openingHoursSpecification;
+    const specificationValues = Array.isArray(specifications) ? specifications : specifications ? [specifications] : [];
+    if (specificationValues.length > 0) {
+      for (const specification of specificationValues) {
+        if (!specification || typeof specification !== "object") continue;
+        const item = specification as Record<string, unknown>;
+        const days = Array.isArray(item.dayOfWeek) ? item.dayOfWeek : [item.dayOfWeek];
+        const weekdays = days.map(structuredDay).filter((day): day is Weekday => day !== null);
+        const opens = structuredTime(item.opens);
+        const closes = structuredTime(item.closes);
+        if (weekdays.length === 0 || !opens || !closes) continue;
+        sawStructuredHours = true;
+        for (const day of weekdays) byWeekday[day] = [{ opens, closes }];
+        evidenceLines.push(`${weekdays.map((day) => WEEKDAY_LABELS[day]).join(", ")} ${opens}-${closes}`);
+      }
+    }
+
+    const openingHours = object.openingHours;
+    const values = typeof openingHours === "string" ? [openingHours] : Array.isArray(openingHours) ? openingHours : [];
+    const textValues = values.filter((value): value is string => typeof value === "string");
+    if (textValues.length > 0) {
+      const parsed = parseOpeningHours(textValues.join("\n"));
+      if (Object.keys(parsed.value.byWeekday).length > 0) {
+        sawStructuredHours = true;
+        for (const [day, intervals] of Object.entries(parsed.value.byWeekday)) {
+          byWeekday[Number(day) as Weekday] = intervals;
+        }
+        evidenceLines.push(...textValues);
+      }
+    }
+  }
+
+  if (!sawStructuredHours) return null;
+  return { value: { byWeekday, notes: undefined }, hadUnparsedSegments: false, evidenceText: evidenceLines.join("\n") };
 }

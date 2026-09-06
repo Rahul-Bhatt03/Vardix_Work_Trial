@@ -180,6 +180,17 @@ describe("runGoldSetEvaluation — unmatched gold clinics", () => {
     expect(report.matchedClinics).toBe(0);
   });
 
+  it("counts positive fields from unmatched gold clinics as false negatives", () => {
+    const gold = [goldRow({ clinicId: "missing", phone: "+46812345678", openingHours: { 1: [{ opens: "08:00", closes: "17:00" }] }, services: ["Implantat"] })];
+    const report = runGoldSetEvaluation(gold, [resolvedRow("other")]);
+    const phone = report.perField.find((f) => f.field === "phone")!;
+    const hours = report.perField.find((f) => f.field === "openingHours")!;
+    const services = report.perField.find((f) => f.field === "services")!;
+    expect(phone).toMatchObject({ goldCount: 1, falseNegative: 1 });
+    expect(hours).toMatchObject({ goldCount: 1, falseNegative: 1 });
+    expect(services).toMatchObject({ goldCount: 1, falseNegative: 1 });
+  });
+
   it("matches a gold clinic by its labelled website when the seed name changed", () => {
     const gold = [goldRow({ clinicId: "old-name--stockholm", clinicName: "A-Dental AB, Stockholm", labelledFrom: "https://adental.se/kontakt" })];
     const actual = [

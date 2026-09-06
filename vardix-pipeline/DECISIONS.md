@@ -61,3 +61,79 @@ through the pipeline) a phone-normalization double-count and an
 all-caps-city address bug. The volume of real bugs caught this way is
 itself evidence for testing against real content rather than only
 synthetic fixtures.
+
+
+## Decision 006 - Deliberately Long-Running Fetches
+
+The pipeline accepts a potentially long runtime for the initial full
+run. A run over approximately 300 clinics may take around two hours
+because requests are checked against `robots.txt`, delayed per host,
+and retried when temporary failures occur. Clinic processing uses a
+small bounded worker pool, while requests to the same host remain
+serialized and rate-limited.
+
+This trade-off favors respectful access to third-party websites,
+stable output ordering, simple failure isolation, and broader evidence
+coverage over maximum throughput. The website source currently fetches
+one homepage per clinic rather than probing several guessed subpages,
+which removes redundant traffic while keeping the documented scope.
+
+Because the worker pool processes several clinics at the same time,
+console progress messages appear in completion order rather than strict
+clinic order. A slow clinic can therefore finish after clinics that
+started later. This is intentional: the returned results and written
+output retain the original input order, while completion-order logging
+allows finished work to be reported immediately instead of blocking on
+an earlier slow clinic.
+
+The accepted costs are high wall-clock time, limited scalability, and
+poor suitability for interactive or frequent refresh workflows. A
+production version should preserve robots compliance while adding
+per-host concurrency, caching, resumable checkpoints, and per-request
+timing so that the runtime can be reduced and measured without turning
+the crawler into an uncontrolled burst of traffic.
+
+
+## Decision 007 - Gold-Set Size and Honest Evaluation
+
+The hand-labelled gold set currently contains 26 clinics, while the brief
+asks for approximately 30. We disclose the four-row gap instead of
+fabricating labels or treating unverified records as ground truth.
+
+Gold identity matching uses stable IDs, normalized organization numbers,
+labelled source domains, and normalized name plus city. When a gold clinic
+cannot be matched to pipeline output, every verified positive field on that
+gold row is counted as a false negative. This prevents recall from being
+inflated by silently excluding unmatched clinics; null or unknown gold
+fields are not scored as misses because no actual value exists to compare.
+
+
+## Decision 008 - Organization-Number Evidence Boundary
+
+The pipeline does not currently use an authoritative company-registry
+source. It accepts an organization number only when clinic website text
+contains a format-valid, Luhn-valid candidate, and records that candidate
+as lower-confidence evidence. Luhn validation checks shape and checksum;
+it does not establish that the number belongs to the clinic.
+
+The accepted trade-off is lower organization-number recall in exchange for
+not presenting unverified registry claims as facts. A production extension
+should add an authoritative registry source and retain the current website
+candidate as separate evidence for conflict detection.
+
+
+## Decision 009 - Opening-Hours Evidence Boundary
+
+Opening hours are extracted deterministically from visible raw HTML and
+schema.org JSON-LD when those values are present in the HTTP response.
+The parser supports Swedish and English weekday names, abbreviated days,
+day ranges, dot or colon times, closed days, compact adjacent segments,
+and `openingHoursSpecification` records. Extracted schedules retain the
+source text as reviewer-facing evidence and continue through the existing
+confidence and conflict resolution path.
+
+The accepted limitation is that client-side JavaScript-rendered hours
+are not available to the current HTTP-only fetcher. The repository stores
+three HTML fixtures, which all have focused extraction coverage; the
+checked-in 300-clinic output predates this fix and must be regenerated in
+a network-capable environment before post-fix full-run coverage is claimed.

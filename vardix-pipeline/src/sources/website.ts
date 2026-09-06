@@ -4,7 +4,7 @@ import type { FetchOutcome, RawEvidence, Source } from "./types.js";
 import { extractPhoneCandidates } from "../extract/phone.js";
 import { extractAddressCandidates } from "../extract/address.js";
 import { extractOrgNoCandidates } from "../extract/orgno.js";
-import { parseOpeningHours } from "../extract/hours.js";
+import { parseOpeningHours, parseStructuredOpeningHours } from "../extract/hours.js";
 import { matchServices } from "../extract/services.js";
 import { detectDentalSubsidyMentions } from "../extract/subsidy.js";
 import { pickBestBookingLink, type LinkCandidate } from "../extract/booking.js";
@@ -98,9 +98,7 @@ export class WebsiteSource implements Source {
   readonly sourceType = "clinic_website" as const;
 
   discover(clinic: SeedClinic): string[] {
-    const base = clinic.website.replace(/\/+$/, "");
-    const paths = ["/kontakt", "/om-oss", "/oppettider", "/boka"];
-    return [clinic.website, ...paths.map((path) => `${base}${path}`)];
+    return [clinic.website];
   }
 
   extract(clinic: SeedClinic, fetched: Extract<FetchOutcome, { ok: true }>): RawEvidence {
@@ -198,21 +196,26 @@ export class WebsiteSource implements Source {
 
     // --- Opening hours: prefer a dedicated "öppettider" block if we can find one.
     const hoursBlock = findHoursHeadingBlock($);
-    if (hoursBlock) {
-      const parsed = parseOpeningHours(hoursBlock);
-      if (Object.keys(parsed.value.byWeekday).length > 0 || parsed.value.notes) {
+    const jsonLd = jsonLdObjects($);
+    const structuredHours = parseStructuredOpeningHours(jsonLd);
+    const hasOpeningHoursSpecification = jsonLd.some((object) => object.openingHoursSpecification !== undefined);
+    const parsed = structuredHours ?? (hoursBlock ? parseOpeningHours(hoursBlock) : null);
+    if (parsed && (Object.keys(parsed.value.byWeekday).length > 0 || parsed.value.notes)) {
         evidence.openingHours = [
           {
             value: parsed.value,
             sourceUrl: fetched.url,
             sourceType: this.sourceType,
-            confidence: parsed.hadUnparsedSegments ? 0.45 : 0.65,
-            evidenceText: hoursBlock.slice(0, 300),
+            confidence: parsed.hadUnparsedSegments ? 0.45 : structuredHours ? 0.8 : 0.65,
+            evidenceText: (parsed.evidenceText ?? hoursBlock ?? "").slice(0, 300),
             retrievedAt: now,
-            extractionMethod: "dom:heading-block+parseOpeningHours",
+            extractionMethod: structuredHours
+              ? hasOpeningHoursSpecification
+                ? "jsonld:openingHoursSpecification"
+                : "jsonld:openingHours"
+              : "dom:heading-block+parseOpeningHours",
           },
         ];
-      }
     }
 
     // --- Services + subsidy from the full page text.

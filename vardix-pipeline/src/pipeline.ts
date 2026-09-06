@@ -6,6 +6,8 @@ import { resolveClinicFields } from "./resolve/clinic.js";
 export interface PipelineOptions {
   sources: Source[];
   fetcher?: PoliteFetcher;
+  /** Number of clinics that may be in flight at once. */
+  maxConcurrentClinics?: number;
   /** Called after each clinic finishes, useful for progress reporting on a 300-row run. */
   onClinicDone?: (clinic: ResolvedClinic, index: number, total: number) => void;
 }
@@ -70,12 +72,24 @@ export async function processClinic(clinic: SeedClinic, opts: PipelineOptions): 
 }
 
 export async function processClinics(clinics: SeedClinic[], opts: PipelineOptions): Promise<ResolvedClinic[]> {
-  const results: ResolvedClinic[] = [];
-  for (let i = 0; i < clinics.length; i++) {
-    const clinic = clinics[i]!;
-    const result = await processClinic(clinic, opts);
-    results.push(result);
-    opts.onClinicDone?.(result, i, clinics.length);
+  const maxConcurrentClinics = opts.maxConcurrentClinics ?? 4;
+  if (!Number.isInteger(maxConcurrentClinics) || maxConcurrentClinics < 1) {
+    throw new Error("maxConcurrentClinics must be a positive integer");
   }
+
+  const results: ResolvedClinic[] = new Array(clinics.length);
+  let nextIndex = 0;
+
+  async function worker(): Promise<void> {
+    while (true) {
+      const index = nextIndex++;
+      if (index >= clinics.length) return;
+      const result = await processClinic(clinics[index]!, opts);
+      results[index] = result;
+      opts.onClinicDone?.(result, index, clinics.length);
+    }
+  }
+
+  await Promise.all(Array.from({ length: Math.min(maxConcurrentClinics, clinics.length) }, () => worker()));
   return results;
 }

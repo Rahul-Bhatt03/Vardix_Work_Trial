@@ -68,6 +68,54 @@ describe("processClinic", () => {
     expect(result.fields.email.value).toBe("info@test.example"); // the other source still ran
   });
 
+  it("carries opening-hours evidence through to the resolved clinic", async () => {
+    const source = fakeSource("hours-source", {
+      openingHours: [
+        {
+          value: { byWeekday: { 1: [{ opens: "08:00", closes: "17:00" }] } },
+          sourceUrl: "https://test.example",
+          sourceType: "clinic_website",
+          confidence: 0.65,
+          evidenceText: "Måndag 08:00-17:00",
+          retrievedAt: "2026-09-04T00:00:00.000Z",
+          extractionMethod: "test:opening-hours",
+        },
+      ],
+    });
+    const result = await processClinic(clinic, { sources: [source], fetcher: fakeFetcher(true) });
+    expect(result.fields.openingHours.value?.byWeekday[1]).toEqual([{ opens: "08:00", closes: "17:00" }]);
+    expect(result.fields.openingHours.evidence[0]?.evidenceText).toBe("Måndag 08:00-17:00");
+  });
+
+  it("preserves conflicting opening-hours evidence from multiple sources", async () => {
+    const first = fakeSource("first-hours-source", {
+      openingHours: [{
+        value: { byWeekday: { 1: [{ opens: "08:00", closes: "17:00" }] } },
+        sourceUrl: "https://test.example/first",
+        sourceType: "clinic_website",
+        confidence: 0.65,
+        evidenceText: "Måndag 08:00-17:00",
+        retrievedAt: "2026-09-04T00:00:00.000Z",
+        extractionMethod: "test:first-hours",
+      }],
+    }, ["https://test.example/first"]);
+    const second = fakeSource("second-hours-source", {
+      openingHours: [{
+        value: { byWeekday: { 1: [{ opens: "09:00", closes: "18:00" }] } },
+        sourceUrl: "https://test.example/second",
+        sourceType: "national_health_portal",
+        confidence: 0.85,
+        evidenceText: "Måndag 09:00-18:00",
+        retrievedAt: "2026-09-04T00:00:00.000Z",
+        extractionMethod: "test:second-hours",
+      }],
+    }, ["https://test.example/second"]);
+    const result = await processClinic(clinic, { sources: [first, second], fetcher: fakeFetcher(true) });
+    expect(result.fields.openingHours.conflict).toBe(true);
+    expect(result.fields.openingHours.evidence).toHaveLength(2);
+    expect(result.fields.openingHours.value?.byWeekday[1]).toEqual([{ opens: "09:00", closes: "18:00" }]);
+  });
+
   it("tries the next candidate URL from a source after the first one fails", async () => {
     let callIndex = 0;
     const fetchFn = vi.fn(async (url: string | URL) => {
@@ -115,5 +163,28 @@ describe("processClinics", () => {
     const source = fakeSource("test-source", {});
     const results = await processClinics([badClinic, goodClinic], { sources: [source], fetcher: fakeFetcher(true) });
     expect(results.length).toBe(2);
+  });
+
+  it("limits concurrent clinics while returning results in input order", async () => {
+    let active = 0;
+    let peak = 0;
+    const fetchFn = vi.fn(async (url: string | URL) => {
+      const u = url.toString();
+      if (u.endsWith("/robots.txt")) return new Response("User-agent: *\n", { status: 200 });
+      active++;
+      peak = Math.max(peak, active);
+      await new Promise((resolve) => setTimeout(resolve, 10));
+      active--;
+      return new Response("<html></html>", { status: 200 });
+    }) as unknown as typeof fetch;
+    const clinics = Array.from({ length: 4 }, (_, index) => ({ ...clinic, id: `clinic-${index}`, name: `Clinic ${index}` }));
+    const results = await processClinics(clinics, {
+      sources: [fakeSource("test-source", {})],
+      fetcher: new PoliteFetcher({ fetchFn, minDelayPerHostMs: 0, maxRetries: 0 }),
+      maxConcurrentClinics: 2,
+    });
+
+    expect(peak).toBeLessThanOrEqual(2);
+    expect(results.map((result) => result.seed.id)).toEqual(clinics.map((item) => item.id));
   });
 });
