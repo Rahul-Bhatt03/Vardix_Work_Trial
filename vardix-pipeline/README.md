@@ -7,9 +7,8 @@ subsidy connection, and an online booking URL — from public sources.
 
 Every field carries its source URL, a confidence score, and a conflict
 flag when sources disagree. A field the pipeline could not verify is
-`null`, not a guess. See `DECISIONS.md` for the reasoning behind every
-significant choice below, and `gold-set/README.md` before judging the
-evaluation numbers.
+`null`, not a guess. See `DECISIONS.md` and `EVALUATION.md` for the
+reasoning behind the significant choices and the current evaluation state.
 
 ## What this does
 
@@ -34,13 +33,16 @@ seed-clinics.csv
   number (Luhn-validated), opening hours, address, booking-link scoring,
   dental-subsidy detection, and a service vocabulary matcher.
 - `src/resolve/` — cross-source conflict detection and confidence merging.
-- `src/llm/` — an LLM provider abstraction (graceful no-key degradation)
-  and one narrow LLM-assisted extractor for messy service text.
 - `src/pipeline.ts` — orchestrates the above per clinic; never lets one
   bad clinic or source take down the run.
 - `src/output/writer.ts` — writes the three output files.
 - `src/eval/` — gold-set evaluation (precision/recall per field).
 - `src/cli.ts` — the `run` and `eval` commands.
+
+This checked-in repository is intentionally deterministic: there is no
+`src/llm/` implementation or live LLM-backed extractor in the shipped code.
+The current pipeline relies on public-source HTML extraction and explicit
+source evidence rather than model-based guessing.
 
 ## Setup
 
@@ -49,17 +51,7 @@ npm install
 ```
 
 No environment variables are required to run the deterministic pipeline.
-
-### Environment variables (optional, LLM-assisted extraction only)
-
-| Variable | Required | Default |
-|---|---|---|
-| `ANTHROPIC_API_KEY` | No | none — LLM extraction is skipped if unset |
-| `ANTHROPIC_MODEL` | No | `claude-sonnet-4-6` |
-| `ANTHROPIC_BASE_URL` | No | `https://api.anthropic.com` |
-
-The pipeline runs to completion with all deterministic extraction intact
-whether or not these are set. See `DECISIONS.md`, "LLM usage."
+The current checked-in implementation does not require or use any API keys.
 
 ## Commands
 
@@ -108,7 +100,7 @@ output/
   quality-report.json   # resolved/null/conflict counts + avg confidence, per field
   run-report.json       # sources checked/skipped by reason, processing errors
   eval-report.json      # (after `npm run eval`) precision/recall per field
-  sample/               # a real (not hand-written) run's output, committed for review
+  demo/                 # a small example run kept for review and demos
 ```
 
 Every clinic record can answer: what value was chosen, why, which
@@ -151,7 +143,8 @@ a plausible but unsupported value would be worse than an honest gap.
 - **Gold set is 26 clinics, not the ~30 the brief asks for** — built this
   way deliberately rather than risk fabricated labels. The remaining
   four rows are a known evidence gap, not fabricated placeholders. See
-  `gold-set/README.md` for why and how to extend it.
+  `EVALUATION.md` and the gold-set JSON for the current evaluation and
+  matching constraints.
 - **Website discovery is intentionally bounded** — it checks the
   homepage and likely contact/booking paths, plus static booking controls,
   but cannot see URLs created only after JavaScript executes.
@@ -159,5 +152,5 @@ a plausible but unsupported value would be worse than an honest gap.
   comparison only, so consumers should not assume `phone.value` is always
   normalized.
 
-See `DECISIONS.md` for the full reasoning and `AGENTS.md` for how to
-safely extend this project.
+See `DECISIONS.md` for the full reasoning and extension trade-offs in this
+project.

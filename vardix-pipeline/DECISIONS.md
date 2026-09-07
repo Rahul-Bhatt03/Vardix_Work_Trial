@@ -176,7 +176,7 @@ coverage evidence.
 ## Decision 014 - Deliberately Long-Running Fetches
 
 The pipeline accepts a potentially long runtime for the initial full
-run. A run over approximately 300 clinics may take around 20-25 minutes
+run. A run over approximately 300 clinics may take around 20 minutes
 because requests are checked against `robots.txt`, delayed per host,
 and retried when temporary failures occur. Clinic processing uses a
 small bounded worker pool, while requests to the same host remain

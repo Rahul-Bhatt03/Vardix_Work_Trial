@@ -12,12 +12,12 @@ Gold matching now uses this general hierarchy: preserved seed ID, normalized org
 
 ## Current validation
 
-- `npm test`: the complete automated suite passes; run the command for the current count.
+- `npm test`: the complete automated suite passes in the current repo state.
 - `npm run build`: passed.
 - The current evaluation report has 26 gold rows, 23 matched clinics, and 3
 	unmatched clinic IDs reported in `identityDiagnostics`.
 - The current field metrics are written to `output/eval-report.json` after each `npm run eval`.
-- A full 300-clinic rerun was attempted with bounded relevant website-page discovery. It reached the first clinics, but the restricted network environment made the network-backed run impractical to finish; the previous completed 300-clinic report remains in `output/quality-report.json` until a network-capable run is performed.
+- A full 300-clinic network-backed rerun is not currently claimed as complete in this repo; the checked-in 300-clinic output predates the latest changes and must be regenerated in a network-capable environment before any newer coverage claims are made.
 
 ## Coverage Interpretation
 
