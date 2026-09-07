@@ -45,6 +45,9 @@ export async function processClinic(clinic: SeedClinic, opts: PipelineOptions): 
         rawEvidenceList.push(evidence);
         succeeded = true;
         if (source.sourceType !== "clinic_website") break; // registry sources stop at their first verified page
+        const hasHours = evidence.openingHours?.some((item) => item.value !== null) ?? false;
+        const hasBooking = evidence.bookingUrl?.some((item) => item.value !== null) ?? false;
+        if (hasHours && hasBooking) break; // avoid probing more website paths once both target fields are evidenced
       } catch (err) {
         // A source's extract() throwing (malformed HTML tripping up a
         // selector, etc.) must not take down the whole clinic, let alone
@@ -72,7 +75,7 @@ export async function processClinic(clinic: SeedClinic, opts: PipelineOptions): 
 }
 
 export async function processClinics(clinics: SeedClinic[], opts: PipelineOptions): Promise<ResolvedClinic[]> {
-  const maxConcurrentClinics = opts.maxConcurrentClinics ?? 4;
+  const maxConcurrentClinics = opts.maxConcurrentClinics ?? 8;
   if (!Number.isInteger(maxConcurrentClinics) || maxConcurrentClinics < 1) {
     throw new Error("maxConcurrentClinics must be a positive integer");
   }

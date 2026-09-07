@@ -65,8 +65,6 @@ describe("WebsiteSource opening hours", () => {
       "https://alfatandvard.se",
       "https://alfatandvard.se/kontakt",
       "https://alfatandvard.se/boka",
-      "https://alfatandvard.se/booking",
-      "https://alfatandvard.se/tidsbokning",
     ]);
   });
 

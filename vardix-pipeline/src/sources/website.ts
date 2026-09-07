@@ -137,7 +137,7 @@ export class WebsiteSource implements Source {
 
   discover(clinic: SeedClinic): string[] {
     const base = clinic.website.replace(/\/+$/, "");
-    return [clinic.website, `${base}/kontakt`, `${base}/boka`, `${base}/booking`, `${base}/tidsbokning`];
+    return [clinic.website, `${base}/kontakt`, `${base}/boka`];
   }
 
   extract(clinic: SeedClinic, fetched: Extract<FetchOutcome, { ok: true }>): RawEvidence {

@@ -71,6 +71,29 @@ npm run pipeline      # run the real pipeline against data/seed-clinics.csv -> o
 npm run eval          # score output/clinics.json against gold-set/gold-clinics.json -> output/eval-report.json
 ```
 
+### Selecting Run Size
+
+The `pipeline` npm script already invokes the `run` command. Use the
+following forms when deciding how much data to fetch:
+
+```text
+npm run pipeline -- --limit=10       # first 10 seed clinics; quick demo
+npm run pipeline -- --limit=50       # first 50 clinics; review batch
+npm run pipeline                    # all 300 clinics
+npm run pipeline -- --only=clinic-id-1,clinic-id-2  # exact seed IDs
+```
+
+`--limit` selects the first N rows from `data/seed-clinics.csv` after
+ingestion and validates that N is a positive integer. `--only` selects
+exact stable clinic IDs. Both filters can be combined; `--only` is applied
+after `--limit`, so use `--only` alone when exact IDs must be selected from
+the complete seed file.
+
+Every run rewrites `output/clinics.json`, `quality-report.json`, and
+`run-report.json` for the selected clinics. Run `npm run eval` afterward
+only when the output represents the intended evaluation set; a limited run
+is useful for demos and debugging, but is not a 300-clinic coverage report.
+
 `npm run pipeline` needs real internet access (it fetches ~300 clinics'
 websites and 1177.se pages, politely and rate-limited). It will not work
 in a network-restricted sandbox — see `DECISIONS.md` for how this

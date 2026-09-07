@@ -28,7 +28,7 @@ Explicit `Disallow` rules are always respected.
 This prevents temporary robots.txt failures from stopping the entire pipeline. Skipped sources and fetch failures are still recorded.
 
 
-## Decision 003 - Dental Subsidy Evidence
+## Decision 004 - Dental Subsidy Evidence
 
 The pipeline requires explicit evidence before marking a clinic as connected to the Swedish state dental subsidy scheme.
 
@@ -39,7 +39,7 @@ The subsidy extractor therefore looks for explicit subsidy-related terms or stat
 If the source does not provide sufficient evidence, the pipeline does not guess. It records the field as unconfirmed or unknown based on source availability.
 
 
-## Dependencies 004
+## Dependencies 005
 
 Kept deliberately small and each individually justified: `csv-parse`
 (CSV parsing), `cheerio` (HTML parsing/traversal), `robots-parser`
@@ -48,7 +48,7 @@ Kept deliberately small and each individually justified: `csv-parse`
 without a specific line of code that needed it.
 
 
-## Testing philosophy 005
+## Testing philosophy 006
 
 Every extractor and source has tests written against messy,
 real-world-shaped input — including, wherever this session could obtain
@@ -62,37 +62,6 @@ all-caps-city address bug. The volume of real bugs caught this way is
 itself evidence for testing against real content rather than only
 synthetic fixtures.
 
-
-## Decision 006 - Deliberately Long-Running Fetches
-
-The pipeline accepts a potentially long runtime for the initial full
-run. A run over approximately 300 clinics may take around two hours
-because requests are checked against `robots.txt`, delayed per host,
-and retried when temporary failures occur. Clinic processing uses a
-small bounded worker pool, while requests to the same host remain
-serialized and rate-limited.
-
-This trade-off favors respectful access to third-party websites,
-stable output ordering, simple failure isolation, and broader evidence
-coverage over maximum throughput. The website source currently fetches
-the homepage plus a small set of likely contact/booking paths rather than
-crawling the whole site, which balances booking coverage against request
-volume.
-
-Because the worker pool processes several clinics at the same time,
-console progress messages appear in completion order rather than strict
-clinic order. A slow clinic can therefore finish after clinics that
-started later. This is intentional: the returned results and written
-output retain the original input order, while completion-order logging
-allows finished work to be reported immediately instead of blocking on
-an earlier slow clinic.
-
-The accepted costs are high wall-clock time, limited scalability, and
-poor suitability for interactive or frequent refresh workflows. A
-production version should preserve robots compliance while adding
-per-host concurrency, caching, resumable checkpoints, and per-request
-timing so that the runtime can be reduced and measured without turning
-the crawler into an uncontrolled burst of traffic.
 
 
 ## Decision 007 - Gold-Set Size and Honest Evaluation
@@ -188,3 +157,49 @@ The 80/300 and 143/300 figures are baseline output counts. Because the
 latest extractor changes have not yet been applied to a completed live
 300-clinic rerun, new post-fix coverage must be reported only after a
 network-capable run completes.
+
+
+## Decision 013 - Bounded CLI Runs
+
+The CLI supports bounded extraction runs through `--limit=N` and exact
+selection through `--only=id1,id2`. This lets a reviewer inspect a small
+batch before paying the network cost of a full run. `--limit` must be a
+positive integer, and the full run remains the default when no filter is
+provided.
+
+The trade-off is that a limited output is not representative of all 300
+clinics and overwrites the same output files as a full run. The command
+therefore reports the selected clinic count, and documentation instructs
+reviewers to treat limited runs as demos/debugging rather than full
+coverage evidence.
+
+## Decision 014 - Deliberately Long-Running Fetches
+
+The pipeline accepts a potentially long runtime for the initial full
+run. A run over approximately 300 clinics may take around 20-25 minutes
+because requests are checked against `robots.txt`, delayed per host,
+and retried when temporary failures occur. Clinic processing uses a
+small bounded worker pool, while requests to the same host remain
+serialized and rate-limited.
+
+This trade-off favors respectful access to third-party websites,
+stable output ordering, simple failure isolation, and broader evidence
+coverage over maximum throughput. The website source currently fetches
+the homepage plus a small set of likely contact/booking paths rather than
+crawling the whole site, which balances booking coverage against request
+volume.
+
+Because the worker pool processes several clinics at the same time,
+console progress messages appear in completion order rather than strict
+clinic order. A slow clinic can therefore finish after clinics that
+started later. This is intentional: the returned results and written
+output retain the original input order, while completion-order logging
+allows finished work to be reported immediately instead of blocking on
+an earlier slow clinic.
+
+The accepted costs are high wall-clock time, limited scalability, and
+poor suitability for interactive or frequent refresh workflows. A
+production version should preserve robots compliance while adding
+per-host concurrency, caching, resumable checkpoints, and per-request
+timing so that the runtime can be reduced and measured without turning
+the crawler into an uncontrolled burst of traffic.

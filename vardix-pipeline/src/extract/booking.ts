@@ -77,6 +77,8 @@ export function scoreBookingCandidate(link: LinkCandidate): BookingCandidate | n
       return "";
     }
   })();
+  if (/\.(?:js|mjs|css|map|png|jpe?g|gif|svg|webp|woff2?|ttf)(?:$|[?#])/i.test(path)) return null;
+  if (path.includes("/sendfedops") || path.includes("/analytics") || path.includes("/tracking")) return null;
   if (["/", "/kontakt", "/contact", "/om-oss", "/about", "/services"].includes(path) && score < 3) return null;
   if (GENERIC_WORDS.some((w) => anchor.includes(w)) && score === 0) {
     score -= 2;

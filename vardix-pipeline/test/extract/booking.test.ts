@@ -37,6 +37,14 @@ describe("scoreBookingCandidate", () => {
     const r = scoreBookingCandidate({ href: "https://clinic.example/#", anchorText: "Boka tid" });
     expect(r).toBeNull();
   });
+
+  it("rejects JavaScript assets even when the page context mentions booking", () => {
+    const r = scoreBookingCandidate({
+      href: "https://static.parastorage.com/services/wix-thunderbolt/dist/sendFedopsLoadStarted.bundle.min.js",
+      anchorText: "Boka tid",
+    });
+    expect(r).toBeNull();
+  });
 });
 
 describe("pickBestBookingLink", () => {

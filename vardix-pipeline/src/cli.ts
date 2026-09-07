@@ -50,8 +50,13 @@ async function runCommand(flags: Record<string, string>): Promise<void> {
 
   let clinics = loadSeedCsvFromFile(SEED_CSV_PATH);
 
-  const limit = flags.limit ? Number(flags.limit) : undefined;
-  if (limit) clinics = clinics.slice(0, limit);
+  const limit = flags.limit === undefined ? undefined : Number(flags.limit);
+  if (limit !== undefined) {
+    if (!Number.isInteger(limit) || limit < 1) {
+      throw new Error("--limit must be a positive integer, for example --limit=25");
+    }
+    clinics = clinics.slice(0, limit);
+  }
 
   if (flags.only) {
     const ids = new Set(flags.only.split(","));
@@ -103,7 +108,7 @@ async function main(): Promise<void> {
   if (command === "run") await runCommand(flags);
   else if (command === "eval") await evalCommand();
   else {
-    console.error("Usage: cli.ts <run|eval> [--limit=N] [--only=id1,id2]");
+    console.error("Usage: npm run pipeline -- [--limit=N] [--only=id1,id2]");
     process.exitCode = 1;
   }
 }
