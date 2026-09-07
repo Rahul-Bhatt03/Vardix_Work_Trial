@@ -1,0 +1,1585 @@
+[
+  {
+    "clinicId": "a-dental-ab-stockholm--stockholm",
+    "clinicName": "A-Dental AB, Stockholm",
+    "canonicalName": "A-Dental AB",
+    "orgNumber": "556565-5957",
+    "visitingAddress": {
+      "street": "Karlavägen 48 2tr",
+      "postalCode": "114 49",
+      "city": "Stockholm",
+      "raw": "Karlavägen 48 2tr, 114 49 Stockholm"
+    },
+    "phone": "086606294",
+    "email": "info@adental.se",
+    "openingHours": {
+      "1": [
+        {
+          "opens": "07:30",
+          "closes": "16:00"
+        }
+      ],
+      "2": [
+        {
+          "opens": "07:30",
+          "closes": "16:00"
+        }
+      ],
+      "3": [
+        {
+          "opens": "07:30",
+          "closes": "16:00"
+        }
+      ],
+      "4": [
+        {
+          "opens": "07:30",
+          "closes": "14:00"
+        }
+      ],
+      "5": [],
+      "6": [],
+      "7": []
+    },
+    "services": [
+      "Undersökning",
+      "Lagning",
+      "Protetik",
+      "Rotbehandling",
+      "Tandblekning",
+      "Inman Aligner",
+      "Implantat"
+    ],
+    "dentalSubsidy": "confirmed",
+    "bookingUrl": null,
+    "labelledFrom": [
+      "https://adental.se/",
+      "https://adental.se/priser/",
+      "https://www.1177.se/hitta-vard/kontaktkort/A-Dental-AB-Tdl-Anna-Gawska-Ostermalm/"
+    ],
+    "labelledAt": "2026-09-05",
+    "notes": "Updated against the clinic website. The website publishes the clinic address, phone, email, and current opening hours. The website explicitly documents ATB and STB, so dental subsidy is confirmed. The website and 1177 differ on some opening hours; the clinic website is used for the gold value because it is the first-party source."
+  },
+  {
+    "clinicId": "abbas-dental-ab-helsingborg--helsingborg",
+    "clinicName": "Abbas Dental AB, Helsingborg",
+    "canonicalName": "Abbas Dental AB",
+    "orgNumber": "559081-9750",
+    "visitingAddress": {
+      "street": "Kullagatan 52",
+      "postalCode": "252 20",
+      "city": "Helsingborg",
+      "raw": "Kullagatan 52, 252 20 Helsingborg"
+    },
+    "phone": "0765656594",
+    "email": "abbasdentalab@gmail.com",
+    "openingHours": {
+      "1": [
+        {
+          "opens": "08:00",
+          "closes": "20:00"
+        }
+      ],
+      "2": [
+        {
+          "opens": "08:00",
+          "closes": "20:00"
+        }
+      ],
+      "3": [
+        {
+          "opens": "08:00",
+          "closes": "20:00"
+        }
+      ],
+      "4": [
+        {
+          "opens": "08:00",
+          "closes": "20:00"
+        }
+      ],
+      "5": [
+        {
+          "opens": "08:00",
+          "closes": "20:00"
+        }
+      ],
+      "6": [
+        {
+          "opens": "08:00",
+          "closes": "20:00"
+        }
+      ],
+      "7": [
+        {
+          "opens": "08:00",
+          "closes": "20:00"
+        }
+      ]
+    },
+    "services": [
+      "Undersökning",
+      "Akuttandvård",
+      "Tandstenborttagning",
+      "Lagning",
+      "Tandextraktion",
+      "Kronor och broar",
+      "Proteser",
+      "Bettskena",
+      "Rotfyllning",
+      "Implantat"
+    ],
+    "dentalSubsidy": "confirmed",
+    "bookingUrl": "https://www.abbasdental.se/kontakt",
+    "labelledFrom": [
+      "https://www.abbasdental.se/",
+      "https://www.abbasdental.se/kontakt",
+      "https://www.abbasdental.se/team",
+      "https://www.abbasdental.se/tandlakare-kvall-och-helg"
+    ],
+    "labelledAt": "2026-09-05",
+    "notes": "Updated against the clinic website. The site explicitly publishes the phone, email, address, and daily 08:00-20:00 opening hours. It states that the clinic uses Försäkringskassan reference prices and has Region Skåne arrangements. The website also explicitly says it does not have a children's dentistry contract and only treats adults; therefore Barn- och ungdomstandvård must not be extracted as a service."
+  },
+  {
+    "clinicId": "bjuvs-tandvardsteam-ab-bjuv--bjuv",
+    "clinicName": "Bjuvs Tandvårdsteam AB, Bjuv",
+    "canonicalName": "Bjuvs Tandvårdsteam",
+    "orgNumber": "556680-6351",
+    "visitingAddress": {
+      "street": "Bankgatan 3",
+      "postalCode": "267 34",
+      "city": "Bjuv",
+      "raw": "Bankgatan 3, 267 34 Bjuv"
+    },
+    "phone": "04274210",
+    "email": "info@bjuvstandvardsteam.se",
+    "openingHours": {
+      "1": [
+        {
+          "opens": "07:00",
+          "closes": "14:50"
+        }
+      ],
+      "2": [
+        {
+          "opens": "08:30",
+          "closes": "18:35"
+        }
+      ],
+      "3": [
+        {
+          "opens": "08:00",
+          "closes": "18:35"
+        }
+      ],
+      "4": [
+        {
+          "opens": "08:10",
+          "closes": "14:50"
+        }
+      ],
+      "5": [
+        {
+          "opens": "07:00",
+          "closes": "12:45"
+        }
+      ],
+      "6": [],
+      "7": []
+    },
+    "services": [
+      "Invisalign",
+      "Akuttandvård",
+      "Allmäntandvård"
+    ],
+    "dentalSubsidy": "not_found",
+    "bookingUrl": null,
+    "labelledFrom": [
+      "https://bjuvstandvardsteam.se/"
+    ],
+    "labelledAt": "2026-09-05",
+    "notes": "First-party website remains the preferred source for the gold hours. The homepage currently publishes 07:00-14:50 Monday, 08:30-18:35 Tuesday, 08:00-18:35 Wednesday, 08:10-14:50 Thursday, and 07:00-12:45 Friday. A separate contact page has older/different hours, so this is a genuine same-domain freshness conflict. Telefontider are not used as clinic opening hours."
+  },
+  {
+    "clinicId": "fjarastandlakarn-lindskogs-tandland-ab-kungsbacka--kungsbacka",
+    "clinicName": "Fjäråstandläkarn Lindskogs Tandland AB, Kungsbacka",
+    "canonicalName": "Fjäråstandläkarn Lindskogs Tandland AB, Kungsbacka",
+    "orgNumber": "556402-1912",
+    "visitingAddress": {
+      "street": "Fjärås Nyponstig 8",
+      "postalCode": "439 71",
+      "city": "Kungsbacka",
+      "raw": "Fjärås Nyponstig 8, 439 71 Kungsbacka"
+    },
+    "phone": "0300543154",
+    "email": null,
+    "openingHours": {
+      "1": [
+        {
+          "opens": "08:00",
+          "closes": "17:00"
+        }
+      ],
+      "2": [
+        {
+          "opens": "08:00",
+          "closes": "17:00"
+        }
+      ],
+      "3": [
+        {
+          "opens": "08:00",
+          "closes": "17:00"
+        }
+      ],
+      "4": [
+        {
+          "opens": "08:00",
+          "closes": "17:00"
+        }
+      ],
+      "5": [
+        {
+          "opens": "08:00",
+          "closes": "17:00"
+        }
+      ],
+      "6": [],
+      "7": []
+    },
+    "services": [
+      "Implantat"
+    ],
+    "dentalSubsidy": "not_found",
+    "bookingUrl": null,
+    "labelledFrom": [
+      "https://www.1177.se/hitta-vard/kontaktkort/Fjarastandlakarn-Lindskogs-Tandland-AB-Kungsbacka/"
+    ],
+    "labelledAt": "2026-09-05",
+    "notes": "The 1177 record supports the clinic identity, address, phone, hours, and implant service. Organization number 556402-1912 is independently verified from a company/region record. The official clinic website was not independently retrievable in the current verification pass, so no unsupported website values were added."
+  },
+  {
+    "clinicId": "implantatkliniken-tandvard-norrmalm--norrmalm",
+    "clinicName": "Implantatkliniken Tandvård, Norrmalm",
+    "canonicalName": "Implantatkliniken Tandvård",
+    "orgNumber": null,
+    "visitingAddress": {
+      "street": "Sveavägen 91",
+      "postalCode": "113 50",
+      "city": "Stockholm",
+      "raw": "Sveavägen 91, 113 50 Stockholm"
+    },
+    "phone": "08320820",
+    "email": null,
+    "openingHours": {
+      "1": [
+        {
+          "opens": "08:00",
+          "closes": "19:00"
+        }
+      ],
+      "2": [
+        {
+          "opens": "08:00",
+          "closes": "19:00"
+        }
+      ],
+      "3": [
+        {
+          "opens": "08:00",
+          "closes": "19:00"
+        }
+      ],
+      "4": [
+        {
+          "opens": "08:00",
+          "closes": "19:00"
+        }
+      ],
+      "5": [
+        {
+          "opens": "08:00",
+          "closes": "17:00"
+        }
+      ],
+      "6": [],
+      "7": []
+    },
+    "services": [
+      "Tandblekning",
+      "Bettskena",
+      "Rotfyllning",
+      "Implantat",
+      "Tandsten",
+      "Tandreglering",
+      "Tandhygienist",
+      "Akut tandvård"
+    ],
+    "dentalSubsidy": "not_found",
+    "bookingUrl": "https://implantatkliniken.se/boka/",
+    "labelledFrom": [
+      "https://implantatkliniken.se/boka/",
+      "https://implantatkliniken.se/behandlingen/",
+      "https://www.1177.se/hitta-vard/kontaktkort/Implantatkliniken-Tandvard-Norrmalm/"
+    ],
+    "labelledAt": "2026-09-05",
+    "notes": "Updated from the clinic's own website. The website gives Sveavägen 91, 113 50 Stockholm and phone 08 32 08 20. Its current published clinic hours are Mon-Thu 08:00-19:00 and Fri 08:00-17:00, which differ from 1177; first-party hours are used. The site has a real booking page at /boka/. Services were limited to explicit treatment/service terms on the clinic site rather than inferred from the clinic name."
+  },
+  {
+    "clinicId": "sveaparkens-tandlakarklinik-hedeMora--hedemora",
+    "clinicName": "Sveaparkens Tandläkarklinik, Hedemora",
+    "canonicalName": "Sveaparkens Tandläkarklinik",
+    "orgNumber": "556383-1923",
+    "visitingAddress": {
+      "street": "Borganäsvägen 7",
+      "postalCode": "776 31",
+      "city": "Hedemora",
+      "raw": "Borganäsvägen 7, 776 31 Hedemora"
+    },
+    "phone": "022510508",
+    "email": "info@sveaparkstandlakarna.se",
+    "openingHours": {
+      "1": [
+        {
+          "opens": "08:00",
+          "closes": "16:30"
+        }
+      ],
+      "2": [
+        {
+          "opens": "08:00",
+          "closes": "16:30"
+        }
+      ],
+      "3": [
+        {
+          "opens": "08:00",
+          "closes": "17:30"
+        }
+      ],
+      "4": [
+        {
+          "opens": "08:00",
+          "closes": "16:30"
+        }
+      ],
+      "5": [
+        {
+          "opens": "08:00",
+          "closes": "13:30"
+        }
+      ],
+      "6": [],
+      "7": []
+    },
+    "services": [
+      "Allmäntandvård",
+      "Implantatbehandling",
+      "Käkkirurgi",
+      "Ortodonti med Invisalign",
+      "Estetisk Tandvård",
+      "Apnébehandling"
+    ],
+    "dentalSubsidy": "not_found",
+    "bookingUrl": null,
+    "labelledFrom": [
+      "https://www.sveaparkstandlakarna.se/kontakt"
+    ],
+    "labelledAt": "2026-09-05",
+    "notes": "Updated against the clinic's own contact page. The official website publishes phone 0225-105 08, email, address, and current hours: Mon/Tue/Thu 08:00-16:30, Wed 08:00-17:30, Fri 08:00-13:30. These differ materially from the older 1177 hours, so the first-party website is used for current hours. Organization number 556383-1923 was independently verified from company records."
+  },
+  {
+    "clinicId": "city-dental-stockholm--stockholm",
+    "clinicName": "City Dental, Stockholm",
+    "canonicalName": "City Dental",
+    "orgNumber": "556680-5478",
+    "visitingAddress": {
+      "street": "Drottninggatan 27",
+      "postalCode": "103 24",
+      "city": "Stockholm",
+      "raw": "Drottninggatan 27, 103 24 Stockholm"
+    },
+    "phone": "08200680",
+    "email": "info@citydental.se",
+    "openingHours": {
+      "1": [
+        {
+          "opens": "07:30",
+          "closes": "20:00"
+        }
+      ],
+      "2": [
+        {
+          "opens": "07:30",
+          "closes": "20:00"
+        }
+      ],
+      "3": [
+        {
+          "opens": "07:30",
+          "closes": "20:00"
+        }
+      ],
+      "4": [
+        {
+          "opens": "07:30",
+          "closes": "20:00"
+        }
+      ],
+      "5": [
+        {
+          "opens": "07:30",
+          "closes": "20:00"
+        }
+      ],
+      "6": [
+        {
+          "opens": "09:00",
+          "closes": "17:00"
+        }
+      ],
+      "7": [
+        {
+          "opens": "10:00",
+          "closes": "17:00"
+        }
+      ]
+    },
+    "services": [
+      "Undersökning",
+      "Lagning",
+      "Rotbehandling",
+      "Tandsten",
+      "Tandskenor",
+      "Tandskydd",
+      "Nya tänder",
+      "Tandblekning",
+      "Tandreglering",
+      "Airflow",
+      "Akut tandvård",
+      "Tandimplantat",
+      "Tandvårdsrädsla"
+    ],
+    "dentalSubsidy": "confirmed",
+    "bookingUrl": "https://citydental.se/en/contact-city-dental/",
+    "labelledFrom": [
+      "https://citydental.se/",
+      "https://citydental.se/behandlingar/",
+      "https://citydental.se/en/contact-city-dental/",
+      "https://citydental.se/dataskyddspolicy/"
+    ],
+    "labelledAt": "2026-09-05",
+    "notes": "Official City Dental pages confirm the address, phone, email, organization number, current opening hours, treatments, and online booking page. The privacy policy identifies City Dental 556680-5478 as the data controller. The booking URL points to the official contact/booking page rather than an unverified external provider."
+  },
+  {
+    "clinicId": "d-dental-tyreso--tyreso",
+    "clinicName": "D-dental, Tyresö",
+    "canonicalName": "D-dental",
+    "orgNumber": null,
+    "visitingAddress": {
+      "street": "Vendelsövägen 61",
+      "postalCode": "135 53",
+      "city": "Tyresö",
+      "raw": "Vendelsövägen 61, 135 53 Tyresö"
+    },
+    "phone": "0707368223",
+    "email": "info@d-dentalab.com",
+    "openingHours": {
+      "1": [
+        {
+          "opens": "08:00",
+          "closes": "18:00"
+        }
+      ],
+      "2": [
+        {
+          "opens": "08:00",
+          "closes": "18:00"
+        }
+      ],
+      "3": [
+        {
+          "opens": "08:00",
+          "closes": "18:00"
+        }
+      ],
+      "4": [
+        {
+          "opens": "08:00",
+          "closes": "18:00"
+        }
+      ],
+      "5": [
+        {
+          "opens": "08:00",
+          "closes": "18:00"
+        }
+      ],
+      "6": [],
+      "7": []
+    },
+    "services": [
+      "Allmäntandvård",
+      "Estetisk tandvård",
+      "Tandblekning",
+      "Akuttandvård",
+      "Undersökningar",
+      "Förebyggande tandvård",
+      "Lagningar",
+      "Rotbehandlingar",
+      "Kirurgi",
+      "Protetik",
+      "Kognitiv behandling av tandvårdsrädsla"
+    ],
+    "dentalSubsidy": "not_found",
+    "bookingUrl": "https://ddental.opusdentalonline.com/",
+    "labelledFrom": "https://d-dentalab.com/, https://d-dentalab.com/behandlingar/allmantandvard, https://d-dentalab.com/behandlingar/estetisk-tandvard, https://d-dentalab.com/behandlingar/akuttandvard",
+    "labelledAt": "2026-09-05",
+    "notes": "Official website confirms the address, phone, email, weekday clinic hours, adult-only care, and services. Saturday/Sunday are published as 'Vid behov', so no fixed structured interval is invented. The site advertises online booking, but no stable booking destination was exposed in the retrieved page. No organization number or explicit state subsidy evidence was established."
+  },
+  {
+    "clinicId": "bjuvs-tandvardsteam-ab--bjuv",
+    "clinicName": "Bjuvs Tandvårdsteam AB, Bjuv",
+    "canonicalName": "Bjuvs Tandvårdsteam AB",
+    "orgNumber": null,
+    "visitingAddress": {
+      "street": "Bankgatan 3",
+      "postalCode": "267 34",
+      "city": "Bjuv",
+      "raw": "Bankgatan 3, 267 34 Bjuv"
+    },
+    "phone": "04274210",
+    "email": null,
+    "openingHours": {
+      "1": [
+        {
+          "opens": "07:45",
+          "closes": "18:00"
+        }
+      ],
+      "2": [
+        {
+          "opens": "07:45",
+          "closes": "18:00"
+        }
+      ],
+      "3": [
+        {
+          "opens": "07:30",
+          "closes": "13:00"
+        }
+      ],
+      "4": [
+        {
+          "opens": "08:00",
+          "closes": "18:00"
+        }
+      ],
+      "5": [
+        {
+          "opens": "07:30",
+          "closes": "13:00"
+        }
+      ],
+      "6": [],
+      "7": []
+    },
+    "services": [
+      "Allmän tandvård",
+      "Akut tandvård",
+      "Tandlagning",
+      "Tandextraktion"
+    ],
+    "dentalSubsidy": "Region Skåne",
+    "bookingUrl": null,
+    "labelledFrom": "https://www.1177.se/hitta-vard/kontaktkort/Bjuvs-Tandvardsteam-AB-Bjuv/, http://www.bjuvstandvardsteam.se",
+    "labelledAt": "2026-09-05",
+    "notes": "1177 confirms the clinic name, visiting and postal address, phone number, telephone hours, opening hours, website, private ownership, and that the business works on behalf of Region Skåne. The clinic provides regular dental examinations and preventive advice, acute dental care, tooth restoration, and tooth extraction, and can refer patients to other dental providers when needed. Lunch breaks are noted for Monday, Tuesday, and Thursday in the telephone/opening-hours information. No organisation number, email address, or dedicated online booking URL was established from the supplied data."
+  },
+  {
+    "clinicId": "fjarastandlakarn-lindskogs-tandland-ab--kungsbacka",
+    "clinicName": "Fjäråstandläkarn Lindskogs Tandland AB, Kungsbacka",
+    "canonicalName": "Fjäråstandläkarn Lindskogs Tandland AB",
+    "orgNumber": null,
+    "visitingAddress": {
+      "street": "Fjärås Nyponstig 8",
+      "postalCode": "439 71",
+      "city": "Kungsbacka",
+      "raw": "Fjärås Nyponstig 8, 439 71 Kungsbacka"
+    },
+    "phone": "0300543154",
+    "email": null,
+    "openingHours": {
+      "1": [
+        {
+          "opens": "08:00",
+          "closes": "17:00"
+        }
+      ],
+      "2": [
+        {
+          "opens": "08:00",
+          "closes": "17:00"
+        }
+      ],
+      "3": [
+        {
+          "opens": "08:00",
+          "closes": "17:00"
+        }
+      ],
+      "4": [
+        {
+          "opens": "08:00",
+          "closes": "17:00"
+        }
+      ],
+      "5": [
+        {
+          "opens": "08:00",
+          "closes": "17:00"
+        }
+      ],
+      "6": [],
+      "7": []
+    },
+    "services": [
+      "Traditionell tandvård",
+      "Tandimplantat"
+    ],
+    "dentalSubsidy": "Region Halland",
+    "bookingUrl": null,
+    "labelledFrom": "https://www.1177.se/hitta-vard/kontaktkort/Fjarastandlakarn-Lindskogs-Tandland-AB-Kungsbacka/, http://www.fjarastandlakarn.se",
+    "labelledAt": "2026-09-05",
+    "notes": "1177 confirms the clinic name, visiting and postal address, phone number, telephone hours, opening hours, website, private ownership, and that the business works on behalf of Region Halland. Opening hours are marked as potentially variable on 1177. The clinic offers traditional dental care and dental implants. No organisation number, email address, or dedicated online booking URL was established from the supplied data."
+  },
+  {
+    "clinicId": "implantatkliniken-tandvard--norrmalm",
+    "clinicName": "Implantatkliniken Tandvård, Norrmalm",
+    "canonicalName": "Implantatkliniken Tandvård",
+    "orgNumber": null,
+    "visitingAddress": {
+      "street": "Sveavägen 91",
+      "postalCode": "113 50",
+      "city": "Stockholm",
+      "raw": "Sveavägen 91, 113 50 Stockholm"
+    },
+    "phone": "08320820",
+    "email": null,
+    "openingHours": {
+      "1": [
+        {
+          "opens": "09:00",
+          "closes": "21:00"
+        }
+      ],
+      "2": [
+        {
+          "opens": "09:00",
+          "closes": "18:00"
+        }
+      ],
+      "3": [
+        {
+          "opens": "09:00",
+          "closes": "18:00"
+        }
+      ],
+      "4": [
+        {
+          "opens": "09:00",
+          "closes": "18:00"
+        }
+      ],
+      "5": [
+        {
+          "opens": "09:00",
+          "closes": "15:00"
+        }
+      ],
+      "6": [],
+      "7": []
+    },
+    "services": [],
+    "dentalSubsidy": "Region Stockholm",
+    "bookingUrl": null,
+    "labelledFrom": "https://www.1177.se/hitta-vard/kontaktkort/Implantatkliniken-Tandvard-Norrmalm/, http://implantatkliniken.se",
+    "labelledAt": "2026-09-05",
+    "notes": "1177 confirms the clinic name, visiting and postal address, phone number, telephone hours, opening hours, website, private ownership, and that the business works on behalf of Region Stockholm. No specific treatment/service list, organisation number, email address, or dedicated online booking URL was established from the supplied 1177 data."
+  },
+  {
+    "clinicId": "sveaparkens-tandlakarklinik--hedemora",
+    "clinicName": "Sveaparkens Tandläkarklinik, Hedemora",
+    "canonicalName": "Sveaparkens Tandläkarklinik",
+    "orgNumber": null,
+    "visitingAddress": {
+      "street": "Borganäsvägen 7",
+      "postalCode": "776 31",
+      "city": "Hedemora",
+      "raw": "Borganäsvägen 7, 776 31 Hedemora"
+    },
+    "phone": "022510508",
+    "email": null,
+    "openingHours": {
+      "1": [
+        {
+          "opens": "08:00",
+          "closes": "17:00"
+        }
+      ],
+      "2": [
+        {
+          "opens": "08:00",
+          "closes": "17:00"
+        }
+      ],
+      "3": [
+        {
+          "opens": "08:00",
+          "closes": "17:00"
+        }
+      ],
+      "4": [
+        {
+          "opens": "08:00",
+          "closes": "17:00"
+        }
+      ],
+      "5": [
+        {
+          "opens": "08:00",
+          "closes": "12:00"
+        }
+      ],
+      "6": [],
+      "7": []
+    },
+    "services": [
+      "Snark och sömnapnébehandling",
+      "Tandimplantat",
+      "Tandkirurgi"
+    ],
+    "dentalSubsidy": "Region Dalarna",
+    "bookingUrl": null,
+    "labelledFrom": "https://www.1177.se/hitta-vard/kontaktkort/Sveaparkens-Tandlakarklinik-Hedemora/, https://www.sveaparkstandlakarna.se",
+    "labelledAt": "2026-09-05",
+    "notes": "1177 confirms the clinic name, visiting and postal address, phone number, opening hours, website, private ownership, and that the business works on behalf of Region Dalarna. The clinic provides snoring and sleep-apnea treatment, dental implants, and dental surgery. No organisation number, email address, or dedicated online booking URL was established from the supplied data."
+  },
+  {
+    "clinicId": "tandlakare-juan-aldin-smart-dentist-goteborg--goteborg",
+    "clinicName": "Tandläkare Juan Aldin Smart Dentist Göteborg, Göteborg",
+    "canonicalName": "Smart Dentist Göteborg",
+    "orgNumber": null,
+    "visitingAddress": {
+      "street": "Kyrkogatan 24",
+      "postalCode": "411 15",
+      "city": "Göteborg",
+      "raw": "Kyrkogatan 24, 411 15 Göteborg"
+    },
+    "phone": "0317017474",
+    "email": null,
+    "openingHours": {
+      "1": [
+        {
+          "opens": "08:00",
+          "closes": "18:00"
+        }
+      ],
+      "2": [
+        {
+          "opens": "08:00",
+          "closes": "17:00"
+        }
+      ],
+      "3": [
+        {
+          "opens": "08:00",
+          "closes": "17:00"
+        }
+      ],
+      "4": [
+        {
+          "opens": "08:00",
+          "closes": "17:00"
+        }
+      ],
+      "5": [
+        {
+          "opens": "08:00",
+          "closes": "17:00"
+        }
+      ],
+      "6": [],
+      "7": []
+    },
+    "services": [
+      "Allmän tandvård",
+      "Akut tandvård",
+      "Estetisk tandvård",
+      "Protetik",
+      "Oral kirurgi",
+      "Tandimplantat"
+    ],
+    "dentalSubsidy": "Västra Götalandsregionen",
+    "bookingUrl": null,
+    "labelledFrom": "https://www.1177.se/hitta-vard/kontaktkort/Tandlakare-Juan-Aldin-Smart-Dentist-Goteborg-Goteborg/, https://www.smartdentist.se/",
+    "labelledAt": "2026-09-05",
+    "notes": "1177 confirms the clinic name, visiting and postal address, phone number, telephone hours, opening hours, website, private ownership, and that the business works on behalf of Västra Götalandsregionen. The clinic offers general, acute and aesthetic dentistry, prosthetics, oral surgery and dental implants. No organisation number, email address, or dedicated online booking URL was established from the supplied data."
+  },
+  {
+    "clinicId": "helsingborgstandlakarna--helsingborg",
+    "clinicName": "Helsingborgstandläkarna, Helsingborg",
+    "canonicalName": "Helsingborgstandläkarna",
+    "orgNumber": null,
+    "visitingAddress": {
+      "street": "Springpostgränden 3B",
+      "postalCode": null,
+      "city": "Helsingborg",
+      "raw": "Springpostgränden 3B, Helsingborg"
+    },
+    "phone": "042130909",
+    "email": null,
+    "openingHours": {
+      "1": [
+        {
+          "opens": "07:00",
+          "closes": "19:00"
+        }
+      ],
+      "2": [
+        {
+          "opens": "07:00",
+          "closes": "19:00"
+        }
+      ],
+      "3": [
+        {
+          "opens": "07:00",
+          "closes": "19:00"
+        }
+      ],
+      "4": [
+        {
+          "opens": "07:00",
+          "closes": "19:00"
+        }
+      ],
+      "5": [
+        {
+          "opens": "07:00",
+          "closes": "17:00"
+        }
+      ],
+      "6": [],
+      "7": []
+    },
+    "services": [
+      "Allmän tandvård",
+      "Akut tandvård",
+      "Tandhygienist",
+      "Tandimplantat",
+      "Estetisk tandvård",
+      "Tandblekning",
+      "Invisalign",
+      "Tandkirurgi",
+      "Bettskenor",
+      "Apnébehandling"
+    ],
+    "dentalSubsidy": "Region Skåne",
+    "bookingUrl": null,
+    "labelledFrom": "https://www.1177.se/hitta-vard/kontaktkort/Helsingborgstandlakarna-Helsingborg/, https://helsingborgtandlakarna.se/",
+    "labelledAt": "2026-09-05",
+    "notes": "1177 confirms the clinic name, visiting address, phone number, telephone hours, opening hours, website, private ownership, and that the business works on behalf of Region Skåne. The clinic has two dental teams and provides extended morning and evening availability. Services include general and acute dentistry, dental hygienist care, implants, aesthetic dentistry, teeth whitening, Invisalign, dental surgery, bite guards, and sleep-apnea-related treatment. No organisation number, email address, postal code, or dedicated online booking URL was established from the supplied 1177 data."
+  },
+  {
+    "clinicId": "alviks-strand-tandlakarna--bromma",
+    "clinicName": "Alviks Strand Tandläkarna, Bromma",
+    "canonicalName": "Alviks Strand Tandläkarna",
+    "orgNumber": null,
+    "visitingAddress": {
+      "street": "Gustavslundsvägen 141",
+      "postalCode": "167 51",
+      "city": "Bromma",
+      "raw": "Gustavslundsvägen 141, 167 51 Bromma"
+    },
+    "phone": "08801006",
+    "email": null,
+    "openingHours": {
+      "1": [
+        {
+          "opens": "08:00",
+          "closes": "17:00"
+        }
+      ],
+      "2": [
+        {
+          "opens": "08:00",
+          "closes": "17:00"
+        }
+      ],
+      "3": [
+        {
+          "opens": "08:00",
+          "closes": "17:00"
+        }
+      ],
+      "4": [
+        {
+          "opens": "08:00",
+          "closes": "17:00"
+        }
+      ],
+      "5": [
+        {
+          "opens": "08:00",
+          "closes": "13:00"
+        }
+      ],
+      "6": [],
+      "7": []
+    },
+    "services": [
+      "Allmän tandvård",
+      "Tandhygienist",
+      "Tandimplantat",
+      "Tandblekning",
+      "Estetisk tandvård",
+      "Tandvårdsrädsla"
+    ],
+    "dentalSubsidy": "Region Stockholm",
+    "bookingUrl": null,
+    "labelledFrom": "https://www.1177.se/hitta-vard/kontaktkort/Alviks-Strand-Tandlakarna-Bromma/, https://www.alviksstrandtandlakarna.se/",
+    "labelledAt": "2026-09-05",
+    "notes": "1177 confirms the clinic name, visiting and postal address, phone number, telephone hours, opening hours, website, private ownership, and that the business works on behalf of Region Stockholm. The clinic provides general dentistry, dental hygienist services, implants, teeth whitening, aesthetic dentistry, and support for patients with dental anxiety. The clinic states that children aged 3-19 are treated free of charge. No organisation number, email address, or dedicated online booking URL was established from the supplied data."
+  },
+  {
+    "clinicId": "charlottenbergs-tandklinik--charlottenberg",
+    "clinicName": "Charlottenberg Dental Clinic, Charlottenberg",
+    "canonicalName": "Charlottenbergs Tandklinik",
+    "orgNumber": null,
+    "visitingAddress": {
+      "street": "Postgatan 12",
+      "postalCode": "673 32",
+      "city": "Charlottenberg",
+      "raw": "Postgatan 12, 673 32 Charlottenberg"
+    },
+    "phone": "057120097",
+    "email": null,
+    "openingHours": {
+      "1": [
+        {
+          "opens": "08:00",
+          "closes": "16:30"
+        }
+      ],
+      "2": [
+        {
+          "opens": "08:00",
+          "closes": "16:30"
+        }
+      ],
+      "3": [
+        {
+          "opens": "08:00",
+          "closes": "16:30"
+        }
+      ],
+      "4": [
+        {
+          "opens": "08:00",
+          "closes": "16:30"
+        }
+      ],
+      "5": [
+        {
+          "opens": "08:00",
+          "closes": "14:00"
+        }
+      ],
+      "6": [],
+      "7": []
+    },
+    "services": [
+      "Allmän tandvård",
+      "Tandimplantat",
+      "Tandblekning"
+    ],
+    "dentalSubsidy": "Region Värmland",
+    "bookingUrl": null,
+    "labelledFrom": "https://www.1177.se/Varmland/hitta-vard/kontaktkort/Charlottenbergs-Tandklinik-Charlottenberg/, http://www.charlottenbergs-tandklinik.se",
+    "labelledAt": "2026-09-05",
+    "notes": "1177 confirms the clinic name, visiting and postal address, phone number, telephone hours, opening hours, website, private ownership, and that the business works on behalf of Region Värmland. The clinic offers general dentistry, dental implants, and teeth whitening. No organisation number, email address, or dedicated online booking URL was established from the supplied data."
+  },
+  {
+    "clinicId": "bio-oral-dental--solna",
+    "clinicName": "Bio Oral Dental",
+    "canonicalName": "Bio Oral Dental",
+    "orgNumber": "559270-0218",
+    "visitingAddress": {
+      "street": "Hotellgatan 3",
+      "postalCode": "171 45",
+      "city": "Solna",
+      "raw": "Hotellgatan 3, 171 45 Solna"
+    },
+    "phone": "08270600",
+    "email": "info@biooraldental.se",
+    "openingHours": {
+      "1": [
+        {
+          "opens": "08:30",
+          "closes": "17:00"
+        }
+      ],
+      "2": [
+        {
+          "opens": "08:30",
+          "closes": "17:00"
+        }
+      ],
+      "3": [
+        {
+          "opens": "08:30",
+          "closes": "17:00"
+        }
+      ],
+      "4": [
+        {
+          "opens": "08:30",
+          "closes": "17:00"
+        }
+      ],
+      "5": [],
+      "6": [],
+      "7": []
+    },
+    "services": [
+      "Allmän tandvård",
+      "Akut tandvård",
+      "Tandläkarundersökning",
+      "Estetisk tandvård",
+      "Ortodonti",
+      "Osynlig tandställning",
+      "Dental komposit",
+      "Tandimplantat",
+      "Tandblekning",
+      "Rotfyllning"
+    ],
+    "dentalSubsidy": "Region Stockholm",
+    "bookingUrl": null,
+    "labelledFrom": "https://www.varden.se/behandling/60836-bio-oral-dental-60836/27202-tandlakarundersokning, https://www.biooraldental.se/",
+    "labelledAt": "2026-09-05",
+    "notes": "Vården.se confirms the clinic's current contact details, website, services, and appointment availability. Bio Oral Dental offers general and emergency dental care, examinations, aesthetic dentistry, orthodontics, invisible braces, dental implants, teeth whitening, and root canal treatment. The clinic's contact email is info@biooraldental.se and phone number is 08-27 06 00. Opening hours shown here are Monday-Thursday 08:30-17:00 based on the supplied Vården.se data; Friday-Sunday hours were not provided in the supplied content. The organisation number and full postal address are based on previously verified clinic/company information. No dedicated booking URL was established from the supplied content."
+  },
+  {
+    "clinicId": "agea-dental-nasby-park-centrum--taby",
+    "clinicName": "Agea Dental Näsby Park centrum, Täby",
+    "canonicalName": "Agea Dental",
+    "orgNumber": null,
+    "visitingAddress": {
+      "street": "Eskadervägen 4",
+      "postalCode": null,
+      "city": "Täby",
+      "raw": "Eskadervägen 4, Täby"
+    },
+    "phone": "087563880",
+    "email": null,
+    "openingHours": {
+      "1": [
+        {
+          "opens": "08:00",
+          "closes": "16:00"
+        }
+      ],
+      "2": [
+        {
+          "opens": "08:00",
+          "closes": "16:00"
+        }
+      ],
+      "3": [
+        {
+          "opens": "08:00",
+          "closes": "16:00"
+        }
+      ],
+      "4": [
+        {
+          "opens": "08:00",
+          "closes": "13:00"
+        }
+      ],
+      "5": [],
+      "6": [],
+      "7": []
+    },
+    "services": [],
+    "dentalSubsidy": "Region Stockholm",
+    "bookingUrl": null,
+    "labelledFrom": "https://www.1177.se/hitta-vard/kontaktkort/Agea-Dental-Nasby-Park-centrum-Taby/, http://www.ageadental.se",
+    "labelledAt": "2026-09-05",
+    "notes": "1177 confirms the clinic name, visiting address, phone number, telephone hours, opening hours, website, private ownership, and that the business works on behalf of Region Stockholm. No postal code, organisation number, email address, specific treatment/service list, or dedicated online booking URL was established from the supplied data, so those fields remain null/empty rather than being inferred."
+  },
+  {
+    "clinicId": "city-tandvard--uppsala",
+    "clinicName": "City Tandvård, Uppsala",
+    "canonicalName": "City Tandvård",
+    "orgNumber": null,
+    "visitingAddress": {
+      "street": "S:t Olofsgatan 11",
+      "postalCode": "753 21",
+      "city": "Uppsala",
+      "raw": "S:t Olofsgatan 11, 753 21 Uppsala"
+    },
+    "phone": "018124210",
+    "email": null,
+    "openingHours": {
+      "1": [
+        {
+          "opens": "08:00",
+          "closes": "17:00"
+        }
+      ],
+      "2": [
+        {
+          "opens": "08:00",
+          "closes": "16:00"
+        }
+      ],
+      "3": [
+        {
+          "opens": "08:00",
+          "closes": "16:00"
+        }
+      ],
+      "4": [],
+      "5": [
+        {
+          "opens": "08:00",
+          "closes": "13:00"
+        }
+      ],
+      "6": [],
+      "7": []
+    },
+    "services": [
+      "Allmän tandvård",
+      "Förebyggande tandvård",
+      "Estetisk tandvård",
+      "Akut tandvård",
+      "Sömnapnébehandling"
+    ],
+    "dentalSubsidy": "Region Uppsala",
+    "bookingUrl": "https://boka.frenda.se/349191",
+    "labelledFrom": "https://www.1177.se/hitta-vard/kontaktkort/City-Tandvard-Uppsala/, https://www.citytandvard.se/",
+    "labelledAt": "2026-09-05",
+    "notes": "1177 confirms the clinic name, address, phone number, opening hours, website, private ownership, and that the business works on behalf of Region Uppsala. The clinic provides dental care for both children and adults, including preventive, aesthetic, acute, and sleep-apnea-related care. The 1177 page provides a direct online booking link through Frenda. No organisation number or email address was established from the supplied data."
+  },
+  {
+    "clinicId": "akuttandvarden-tensta--spanga",
+    "clinicName": "Akuttandvården Tensta, Spånga",
+    "canonicalName": "Akuttandvården Tensta",
+    "orgNumber": "556995-5148",
+    "visitingAddress": {
+      "street": "Tenstagången 35",
+      "postalCode": "164 63",
+      "city": "Spånga",
+      "raw": "Tenstagången 35, 164 63 Spånga"
+    },
+    "phone": "08364050",
+    "email": "info@atvtensta.se",
+    "openingHours": {
+      "1": [
+        {
+          "opens": "09:00",
+          "closes": "18:00"
+        }
+      ],
+      "2": [
+        {
+          "opens": "09:00",
+          "closes": "18:00"
+        }
+      ],
+      "3": [
+        {
+          "opens": "09:00",
+          "closes": "18:00"
+        }
+      ],
+      "4": [
+        {
+          "opens": "09:00",
+          "closes": "18:00"
+        }
+      ],
+      "5": [
+        {
+          "opens": "09:00",
+          "closes": "18:00"
+        }
+      ],
+      "6": [
+        {
+          "opens": "00:00",
+          "closes": "23:59"
+        }
+      ],
+      "7": [
+        {
+          "opens": "00:00",
+          "closes": "23:59"
+        }
+      ]
+    },
+    "services": [
+      "Allmän tandvård",
+      "Akut tandvård"
+    ],
+    "dentalSubsidy": "Region Stockholm",
+    "bookingUrl": null,
+    "labelledFrom": "https://www.1177.se/hitta-vard/kontaktkort/Akuttandvarden-Tensta-Spanga/, https://atvtensta.eu/",
+    "labelledAt": "2026-09-05",
+    "notes": "1177 confirms the clinic address, phone number, telephone hours, opening hours, website, private ownership, and that the business works on behalf of Region Stockholm. The clinic provides general dentistry and accepts acute treatments. Saturday and Sunday are listed as 24-hour availability specifically for acute needs, while the regular telephone hours are closed on weekends. The official clinic website independently identifies the clinic as Akuttandvården Tensta and provides contact details. No dedicated online booking URL was established."
+  },
+  {
+    "clinicId": "boras-hudlakarmottagning-apostolos-parisopoulos--boras",
+    "clinicName": "Borås Hudläkarmottagning Apostolos Parisopoulos, Borås",
+    "canonicalName": "Borås Hudläkarmottagning Apostolos Parisopoulos",
+    "orgNumber": null,
+    "visitingAddress": {
+      "street": "Västerlånggatan 20",
+      "postalCode": "503 30",
+      "city": "Borås",
+      "raw": "Västerlånggatan 20, 503 30 Borås"
+    },
+    "phone": "033132080",
+    "email": null,
+    "openingHours": {
+      "1": [
+        {
+          "opens": "08:00",
+          "closes": "16:30"
+        }
+      ],
+      "2": [
+        {
+          "opens": "08:00",
+          "closes": "16:30"
+        }
+      ],
+      "3": [
+        {
+          "opens": "08:00",
+          "closes": "16:30"
+        }
+      ],
+      "4": [
+        {
+          "opens": "08:00",
+          "closes": "16:30"
+        }
+      ],
+      "5": [
+        {
+          "opens": "08:00",
+          "closes": "16:30"
+        }
+      ],
+      "6": [],
+      "7": []
+    },
+    "services": [
+      "Dermatology"
+    ],
+    "dentalSubsidy": "not_applicable",
+    "bookingUrl": null,
+    "labelledFrom": "https://www.1177.se/hitta-vard/kontaktkort/Boras-Hudlakarmottagning-Apostolos-Parisopoulos-Boras/, https://borashudlakarmottagning.nu/",
+    "labelledAt": "2026-09-05",
+    "notes": "1177 confirms the clinic name, visiting and postal address, phone number, telephone hours, opening hours, website, private ownership, and that the business works on behalf of Västra Götaland Region. This is a dermatologist's office rather than a dental clinic, so dentalSubsidy is not applicable. No organisation number, email address, or dedicated online booking URL was established from the supplied data."
+  },
+  {
+    "clinicId": "an-tandvard-osterbybruk--osterbybruk",
+    "clinicName": "AN Tandvård, Österbybruk",
+    "canonicalName": "AN Tandvård",
+    "orgNumber": null,
+    "visitingAddress": {
+      "street": "Parkvägen 7",
+      "postalCode": "748 31",
+      "city": "Österbybruk",
+      "raw": "Parkvägen 7, 748 31 Österbybruk"
+    },
+    "phone": "029520060",
+    "email": null,
+    "openingHours": {
+      "1": [
+        {
+          "opens": "09:00",
+          "closes": "18:00"
+        }
+      ],
+      "2": [
+        {
+          "opens": "09:00",
+          "closes": "18:00"
+        }
+      ],
+      "3": [
+        {
+          "opens": "09:00",
+          "closes": "18:00"
+        }
+      ],
+      "4": [
+        {
+          "opens": "09:00",
+          "closes": "18:00"
+        }
+      ],
+      "5": [
+        {
+          "opens": "09:00",
+          "closes": "18:00"
+        }
+      ],
+      "6": [],
+      "7": []
+    },
+    "services": [],
+    "dentalSubsidy": "Region Uppsala",
+    "bookingUrl": null,
+    "labelledFrom": "https://www.1177.se/hitta-vard/kontaktkort/AN-Tandvard-Osterbybruk/, https://antandvard.se/",
+    "labelledAt": "2026-09-05",
+    "notes": "1177 confirms the clinic name, visiting and postal address, phone number, opening hours, website, private ownership, and that the business works on behalf of Region Uppsala. No organisation number, email address, specific treatment/service list, or dedicated online booking URL was established from the supplied data, so those fields remain null/empty rather than being inferred."
+  },
+  {
+    "clinicId": "bene-tandvard-ostermalm--stockholm",
+    "clinicName": "Bene Tandvård, Östermalm",
+    "canonicalName": "Bene Tandvård",
+    "orgNumber": "556944-6452",
+    "visitingAddress": {
+      "street": "Artillerigatan 16",
+      "postalCode": "114 51",
+      "city": "Stockholm",
+      "raw": "Artillerigatan 16, 114 51 Stockholm"
+    },
+    "phone": "086116561",
+    "email": "info@benetandvard.se",
+    "openingHours": {
+      "1": [
+        {
+          "opens": "06:45",
+          "closes": "19:30"
+        }
+      ],
+      "2": [
+        {
+          "opens": "06:45",
+          "closes": "19:30"
+        }
+      ],
+      "3": [
+        {
+          "opens": "06:45",
+          "closes": "19:30"
+        }
+      ],
+      "4": [
+        {
+          "opens": "06:45",
+          "closes": "19:30"
+        }
+      ],
+      "5": [
+        {
+          "opens": "06:45",
+          "closes": "15:30"
+        }
+      ],
+      "6": [],
+      "7": []
+    },
+    "services": [
+      "Allmän tandvård",
+      "Specialisttandvård inom endodonti",
+      "Akut tandvård",
+      "Tandvård under narkos"
+    ],
+    "dentalSubsidy": "Region Stockholm",
+    "bookingUrl": null,
+    "labelledFrom": "https://www.1177.se/hitta-vard/kontaktkort/Bene-Tandvard-Ostermalm/, https://benetandvard.se/",
+    "labelledAt": "2026-09-05",
+    "notes": "1177 confirms the clinic address, patient phone number, switchboard, telephone hours, opening hours, website, private ownership, and that the business works on behalf of Region Stockholm. Bene Tandvård offers general dental care, specialist dentistry in endodontics, and treatment under anesthesia in collaboration with anesthesiologists and nurse anesthetists. The official clinic website independently confirms the organisation number, address, switchboard number, email address, and Bene Tandvård services. The dentalSubsidy field reflects the Region Stockholm affiliation; no more specific adult state dental-subsidy wording was established in the supplied 1177 data. No dedicated online booking URL was established."
+  },
+  {
+    "clinicId": "bergshamratandlakarna-maria-mustonen--solna",
+    "clinicName": "Bergshamratandläkarna Maria Mustonen, Solna",
+    "canonicalName": "Bergshamratandläkarna Maria Mustonen",
+    "orgNumber": null,
+    "visitingAddress": {
+      "street": "Björnstigen 10",
+      "postalCode": null,
+      "city": "Solna",
+      "raw": "Björnstigen 10, Solna"
+    },
+    "phone": "08855600",
+    "email": null,
+    "openingHours": {
+      "1": [
+        {
+          "opens": "12:00",
+          "closes": "18:00"
+        }
+      ],
+      "2": [
+        {
+          "opens": "07:30",
+          "closes": "17:00"
+        }
+      ],
+      "3": [
+        {
+          "opens": "10:00",
+          "closes": "19:00"
+        }
+      ],
+      "4": [
+        {
+          "opens": "07:30",
+          "closes": "16:00"
+        }
+      ],
+      "5": [],
+      "6": [],
+      "7": []
+    },
+    "services": [
+      "Allmän tandvård",
+      "Akut tandvård"
+    ],
+    "dentalSubsidy": "not_found",
+    "bookingUrl": null,
+    "labelledFrom": "https://www.1177.se/hitta-vard/kontaktkort/Bergshamratandlakarna-Maria-Mustonen-Solna/",
+    "labelledAt": "2026-09-05",
+    "notes": "1177 confirms the clinic name, visiting address, phone number, opening hours, website, private ownership, and that the business works on behalf of Solna city and Region Stockholm. The clinic states that it accepts new patients and urgent patients and tries to arrange same-day appointments when possible. The reception is disability-adapted and located on the ground floor. No organisation number, email address, explicit dental-subsidy statement, or dedicated online booking URL was established from the supplied 1177 data."
+  },
+  {
+    "clinicId": "brotandlakarna-bro-centrum--bro",
+    "clinicName": "Brotandläkarna, Bro Centrum",
+    "canonicalName": "Brotandläkarna, Bro",
+    "orgNumber": "559240-2159",
+    "visitingAddress": {
+      "street": "Bro Centrum 37",
+      "postalCode": "197 31",
+      "city": "Bro",
+      "raw": "Bro Centrum 37, 197 31 Bro"
+    },
+    "phone": "0858248403",
+    "email": "info@brotandlakarna.se",
+    "openingHours": {
+      "1": [
+        {
+          "opens": "07:30",
+          "closes": "18:00"
+        }
+      ],
+      "2": [
+        {
+          "opens": "07:30",
+          "closes": "17:00"
+        }
+      ],
+      "3": [
+        {
+          "opens": "07:30",
+          "closes": "18:00"
+        }
+      ],
+      "4": [
+        {
+          "opens": "07:00",
+          "closes": "16:30"
+        }
+      ],
+      "5": [
+        {
+          "opens": "07:30",
+          "closes": "13:00"
+        }
+      ],
+      "6": [],
+      "7": []
+    },
+    "services": [
+      "Allmän tandvård",
+      "Estetisk tandvård",
+      "Rotfyllning"
+    ],
+    "dentalSubsidy": "not_found",
+    "bookingUrl": null,
+    "labelledFrom": "https://www.1177.se/Orebrolan/hitta-vard/kontaktkort/Brotandlakarna/, https://brotandlakarna.se/, https://www.eniro.se/brotandl%C3%A4karna%2Bstockholm%2Bab%2Bbro/156355410/firma",
+    "labelledAt": "2026-09-05",
+    "notes": "1177 provides the clinic phone, actual opening hours, and visiting address. The clinic's own website confirms the phone, email, address, and also publishes opening hours that differ from 1177 (Tue 07:30-18:00, Wed 07:30-15:00, Thu 07:30-16:00), so the openingHours field retains 1177's explicit Öppettider and this discrepancy is flagged. Eniro independently identifies Brotandläkarna Stockholm AB at Bro Centrum 37 and gives organisation number 559240-2159 and the same phone number. The official site contains a Försäkringskassan logo but no explicit adult state dental-subsidy statement in the retrieved text, so dentalSubsidy remains not_found. bookingUrl remains null because no dedicated online booking destination was established."
+  },
+  {
+    "clinicId": "dental-human-i-degeberga--degeberga",
+    "clinicName": "Dental Human i Degeberga",
+    "canonicalName": "Dental Human Holding AB",
+    "orgNumber": "559451-4431",
+    "visitingAddress": {
+      "street": "Tingsvägen 25",
+      "postalCode": "297 31",
+      "city": "Degeberga",
+      "raw": "Tingsvägen 25, 297 31 Degeberga"
+    },
+    "phone": "044350555",
+    "email": "tandklinik.info@gmail.com",
+    "openingHours": {
+      "1": [
+        {
+          "opens": "13:00",
+          "closes": "21:00"
+        }
+      ],
+      "2": [
+        {
+          "opens": "13:00",
+          "closes": "21:00"
+        }
+      ],
+      "3": [
+        {
+          "opens": "08:00",
+          "closes": "17:00"
+        }
+      ],
+      "4": [
+        {
+          "opens": "08:00",
+          "closes": "17:00"
+        }
+      ],
+      "5": [
+        {
+          "opens": "08:00",
+          "closes": "17:00"
+        }
+      ],
+      "6": [],
+      "7": []
+    },
+    "services": [
+      "Allmän tandvård",
+      "Förebyggande tandvård",
+      "Rotfyllning",
+      "Protetik",
+      "Tandextraktion",
+      "Kirurgi",
+      "Akut tandvård"
+    ],
+    "dentalSubsidy": "not_found",
+    "bookingUrl": null,
+    "labelledFrom": "https://www.allabolag.se/foretag/dental-human-holding-ab/degeberga/tandl%C3%A4kare/2KITUYNI63IKS, https://arbetsformedlingen.se/Platsbanken/annonser/31073458, https://www.doktorn.com/vardgivare/dental-human-i-klintehamn-ab-degeberga/, https://diabetes.nu/vardgivare/dental-human-i-klintehamn-ab-degeberga/",
+    "labelledAt": "2026-09-05",
+    "notes": "Current 2026 company/working-place sources identify Dental Human Holding AB, org.nr 559451-4431, at Tingsvägen 25, 297 31 Degeberga; the 2026 job listing also gives 044-35 05 55 and tandklinik.info@gmail.com and describes traditional/digital dental care plus examination, preventive care, caries treatment, endodontic treatment, prosthetics, extractions/surgery and acute dental care. Older public clinic directories still list the patient-facing clinic as Dental Human i Klintehamn AB at Brades väg 5 and publish the hours Mon-Tue 13:00-21:00 and Wed-Fri 08:00-17:00, so those hours are retained but should be treated as potentially stale because the current registered worksite is Tingsvägen 25. No explicit state dental-subsidy statement was found, so dentalSubsidy is not_found. No dedicated booking URL was established."
+  }
+]
