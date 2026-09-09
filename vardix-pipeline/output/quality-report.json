@@ -1,0 +1,87 @@
+{
+  "totalClinics": 300,
+  "perField": [
+    {
+      "field": "canonicalName",
+      "resolvedCount": 269,
+      "nullCount": 31,
+      "conflictCount": 123,
+      "averageConfidence": 0.685,
+      "sourceDisagreementCount": 123
+    },
+    {
+      "field": "orgNumber",
+      "resolvedCount": 29,
+      "nullCount": 271,
+      "conflictCount": 0,
+      "averageConfidence": 0.068,
+      "sourceDisagreementCount": 0
+    },
+    {
+      "field": "visitingAddress",
+      "resolvedCount": 152,
+      "nullCount": 148,
+      "conflictCount": 25,
+      "averageConfidence": 0.307,
+      "sourceDisagreementCount": 25
+    },
+    {
+      "field": "phone",
+      "resolvedCount": 243,
+      "nullCount": 57,
+      "conflictCount": 30,
+      "averageConfidence": 0.649,
+      "sourceDisagreementCount": 30
+    },
+    {
+      "field": "email",
+      "resolvedCount": 196,
+      "nullCount": 104,
+      "conflictCount": 10,
+      "averageConfidence": 0.487,
+      "sourceDisagreementCount": 10
+    },
+    {
+      "field": "openingHours",
+      "resolvedCount": 80,
+      "nullCount": 220,
+      "conflictCount": 1,
+      "averageConfidence": 0.153,
+      "sourceDisagreementCount": 1
+    },
+    {
+      "field": "services",
+      "resolvedCount": 219,
+      "nullCount": 81,
+      "conflictCount": 58,
+      "averageConfidence": 0.438,
+      "sourceDisagreementCount": 58
+    },
+    {
+      "field": "dentalSubsidy",
+      "resolvedCount": 45,
+      "nullCount": 255,
+      "conflictCount": 0,
+      "averageConfidence": 0.09,
+      "sourceDisagreementCount": 0
+    },
+    {
+      "field": "free_care_under_19",
+      "resolvedCount": 7,
+      "nullCount": 293,
+      "conflictCount": 0,
+      "averageConfidence": 0.014,
+      "sourceDisagreementCount": 0
+    },
+    {
+      "field": "bookingUrl",
+      "resolvedCount": 139,
+      "nullCount": 161,
+      "conflictCount": 11,
+      "averageConfidence": 0.407,
+      "sourceDisagreementCount": 11
+    }
+  ],
+  "totalConflicts": 258,
+  "clinicsWithAnyConflict": 151
+}

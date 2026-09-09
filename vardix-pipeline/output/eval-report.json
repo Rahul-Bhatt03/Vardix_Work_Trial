@@ -1,0 +1,264 @@
+{
+  "evaluatedAt": "2026-09-09T07:56:33.514Z",
+  "goldSetSize": 26,
+  "matchedClinics": 23,
+  "unmatchedGoldClinicIds": [
+    "helsingborgstandlakarna--helsingborg",
+    "charlottenbergs-tandklinik--charlottenberg",
+    "boras-hudlakarmottagning-apostolos-parisopoulos--boras"
+  ],
+  "identityDiagnostics": [
+    {
+      "goldClinicId": "a-dental-ab-stockholm--stockholm",
+      "matchedPipelineId": "a-dental-ab-tdl-anna-gawska-ostermalm--ostermalm",
+      "method": "website_domain",
+      "details": "Unique labelled-source domain match: adental.se."
+    },
+    {
+      "goldClinicId": "abbas-dental-ab-helsingborg--helsingborg",
+      "matchedPipelineId": "abbas-dental-klinik-helsingborg--helsingborg",
+      "method": "website_domain",
+      "details": "Unique labelled-source domain match: abbasdental.se."
+    },
+    {
+      "goldClinicId": "bjuvs-tandvardsteam-ab-bjuv--bjuv",
+      "matchedPipelineId": "bjuvs-tandvardsteam-ab-bjuv--bjuv",
+      "method": "stable_id",
+      "details": "Gold clinicId equals preserved seed clinic ID."
+    },
+    {
+      "goldClinicId": "fjarastandlakarn-lindskogs-tandland-ab-kungsbacka--kungsbacka",
+      "matchedPipelineId": "fjarastandlakarn-lindskogs-tandland-ab-kungsbacka--kungsbacka",
+      "method": "stable_id",
+      "details": "Gold clinicId equals preserved seed clinic ID."
+    },
+    {
+      "goldClinicId": "implantatkliniken-tandvard-norrmalm--norrmalm",
+      "matchedPipelineId": "implantatkliniken-tandvard-norrmalm--norrmalm",
+      "method": "stable_id",
+      "details": "Gold clinicId equals preserved seed clinic ID."
+    },
+    {
+      "goldClinicId": "sveaparkens-tandlakarklinik-hedeMora--hedemora",
+      "matchedPipelineId": "sveaparkens-tandlakarklinik-hedemora--hedemora",
+      "method": "website_domain",
+      "details": "Unique labelled-source domain match: sveaparkstandlakarna.se."
+    },
+    {
+      "goldClinicId": "city-dental-stockholm--stockholm",
+      "matchedPipelineId": "city-dental--stockholm",
+      "method": "organization_number",
+      "details": "Unique normalized organization number match."
+    },
+    {
+      "goldClinicId": "d-dental-tyreso--tyreso",
+      "matchedPipelineId": "d-dental--tyreso",
+      "method": "website_domain",
+      "details": "Unique labelled-source domain match: d-dentalab.com."
+    },
+    {
+      "goldClinicId": "bjuvs-tandvardsteam-ab--bjuv",
+      "matchedPipelineId": "bjuvs-tandvardsteam-ab-bjuv--bjuv",
+      "method": "name_and_city",
+      "details": "Unique normalized clinic-name and city match."
+    },
+    {
+      "goldClinicId": "fjarastandlakarn-lindskogs-tandland-ab--kungsbacka",
+      "matchedPipelineId": "fjarastandlakarn-lindskogs-tandland-ab-kungsbacka--kungsbacka",
+      "method": "name_and_city",
+      "details": "Unique normalized clinic-name and city match."
+    },
+    {
+      "goldClinicId": "implantatkliniken-tandvard--norrmalm",
+      "matchedPipelineId": "implantatkliniken-tandvard-norrmalm--norrmalm",
+      "method": "name_and_city",
+      "details": "Unique normalized clinic-name and city match."
+    },
+    {
+      "goldClinicId": "sveaparkens-tandlakarklinik--hedemora",
+      "matchedPipelineId": "sveaparkens-tandlakarklinik-hedemora--hedemora",
+      "method": "name_and_city",
+      "details": "Unique normalized clinic-name and city match."
+    },
+    {
+      "goldClinicId": "tandlakare-juan-aldin-smart-dentist-goteborg--goteborg",
+      "matchedPipelineId": "tandlakare-juan-aldin-smart-dentist-goteborg-goteborg--goteborg",
+      "method": "name_and_city",
+      "details": "Unique normalized clinic-name and city match."
+    },
+    {
+      "goldClinicId": "helsingborgstandlakarna--helsingborg",
+      "details": "No unique match by stable ID, organization number, labelled-source domain, or normalized name + city."
+    },
+    {
+      "goldClinicId": "alviks-strand-tandlakarna--bromma",
+      "matchedPipelineId": "alviks-strand-tandlakarna-bromma--bromma",
+      "method": "name_and_city",
+      "details": "Unique normalized clinic-name and city match."
+    },
+    {
+      "goldClinicId": "charlottenbergs-tandklinik--charlottenberg",
+      "details": "No unique match by stable ID, organization number, labelled-source domain, or normalized name + city."
+    },
+    {
+      "goldClinicId": "bio-oral-dental--solna",
+      "matchedPipelineId": "bio-oral-dental--solna",
+      "method": "stable_id",
+      "details": "Gold clinicId equals preserved seed clinic ID."
+    },
+    {
+      "goldClinicId": "agea-dental-nasby-park-centrum--taby",
+      "matchedPipelineId": "agea-dental-nasby-park-centrum-taby--taby",
+      "method": "name_and_city",
+      "details": "Unique normalized clinic-name and city match."
+    },
+    {
+      "goldClinicId": "city-tandvard--uppsala",
+      "matchedPipelineId": "city-tandvard-uppsala--uppsala",
+      "method": "name_and_city",
+      "details": "Unique normalized clinic-name and city match."
+    },
+    {
+      "goldClinicId": "akuttandvarden-tensta--spanga",
+      "matchedPipelineId": "akuttandvarden-tensta-spanga--spanga",
+      "method": "name_and_city",
+      "details": "Unique normalized clinic-name and city match."
+    },
+    {
+      "goldClinicId": "boras-hudlakarmottagning-apostolos-parisopoulos--boras",
+      "details": "No unique match by stable ID, organization number, labelled-source domain, or normalized name + city."
+    },
+    {
+      "goldClinicId": "an-tandvard-osterbybruk--osterbybruk",
+      "matchedPipelineId": "an-tandvard-osterbybruk--osterbybruk",
+      "method": "stable_id",
+      "details": "Gold clinicId equals preserved seed clinic ID."
+    },
+    {
+      "goldClinicId": "bene-tandvard-ostermalm--stockholm",
+      "matchedPipelineId": "bene-tandvard-ostermalm--ostermalm",
+      "method": "name_and_city",
+      "details": "Unique normalized clinic-name and city match."
+    },
+    {
+      "goldClinicId": "bergshamratandlakarna-maria-mustonen--solna",
+      "matchedPipelineId": "bergshamratandlakarna-maria-mustonen-solna--solna",
+      "method": "name_and_city",
+      "details": "Unique normalized clinic-name and city match."
+    },
+    {
+      "goldClinicId": "brotandlakarna-bro-centrum--bro",
+      "matchedPipelineId": "brotandlakarna-bro-centrum--bro",
+      "method": "stable_id",
+      "details": "Gold clinicId equals preserved seed clinic ID."
+    },
+    {
+      "goldClinicId": "dental-human-i-degeberga--degeberga",
+      "matchedPipelineId": "dental-human-i-degeberga--degeberga",
+      "method": "stable_id",
+      "details": "Gold clinicId equals preserved seed clinic ID."
+    }
+  ],
+  "perField": [
+    {
+      "field": "canonicalName",
+      "truePositive": 7,
+      "falsePositive": 16,
+      "falseNegative": 19,
+      "trueNegative": 0,
+      "precision": 0.30434782608695654,
+      "recall": 0.2692307692307692,
+      "goldCount": 26
+    },
+    {
+      "field": "orgNumber",
+      "truePositive": 1,
+      "falsePositive": 1,
+      "falseNegative": 10,
+      "trueNegative": 11,
+      "precision": 0.5,
+      "recall": 0.09090909090909091,
+      "goldCount": 11
+    },
+    {
+      "field": "visitingAddress",
+      "truePositive": 4,
+      "falsePositive": 8,
+      "falseNegative": 22,
+      "trueNegative": 0,
+      "precision": 0.3333333333333333,
+      "recall": 0.15384615384615385,
+      "goldCount": 26
+    },
+    {
+      "field": "phone",
+      "truePositive": 21,
+      "falsePositive": 2,
+      "falseNegative": 5,
+      "trueNegative": 0,
+      "precision": 0.9130434782608695,
+      "recall": 0.8076923076923077,
+      "goldCount": 26
+    },
+    {
+      "field": "email",
+      "truePositive": 9,
+      "falsePositive": 10,
+      "falseNegative": 2,
+      "trueNegative": 2,
+      "precision": 0.47368421052631576,
+      "recall": 0.8181818181818182,
+      "goldCount": 11
+    },
+    {
+      "field": "openingHours",
+      "truePositive": 0,
+      "falsePositive": 5,
+      "falseNegative": 26,
+      "trueNegative": 0,
+      "precision": 0,
+      "recall": 0,
+      "goldCount": 26
+    },
+    {
+      "field": "services",
+      "truePositive": 25,
+      "falsePositive": 62,
+      "falseNegative": 102,
+      "trueNegative": 0,
+      "precision": 0.28735632183908044,
+      "recall": 0.1968503937007874,
+      "goldCount": 127
+    },
+    {
+      "field": "dentalSubsidy",
+      "truePositive": 0,
+      "falsePositive": 2,
+      "falseNegative": 26,
+      "trueNegative": 0,
+      "precision": 0,
+      "recall": 0,
+      "goldCount": 26
+    },
+    {
+      "field": "free_care_under_19",
+      "truePositive": 0,
+      "falsePositive": 1,
+      "falseNegative": 2,
+      "trueNegative": 20,
+      "precision": 0,
+      "recall": 0,
+      "goldCount": 2
+    },
+    {
+      "field": "bookingUrl",
+      "truePositive": 2,
+      "falsePositive": 8,
+      "falseNegative": 3,
+      "trueNegative": 11,
+      "precision": 0.2,
+      "recall": 0.4,
+      "goldCount": 5
+    }
+  ]
+}
