@@ -9,6 +9,7 @@ import { extractAddressCandidates } from "../extract/address.js";
 import { parseOpeningHours } from "../extract/hours.js";
 import { matchServices } from "../extract/services.js";
 import { detectDentalSubsidyMentions } from "../extract/subsidy.js";
+import { detectFreeCareUnder19 } from "../extract/free-care.js";
 
 // 1177.se ("Hitta vård") publishes one page per registered care unit at a
 // predictable URL: the unit's official name, title-cased-and-hyphenated,
@@ -236,6 +237,18 @@ export class Registry1177Source implements Source {
             extractionMethod: "dom-section:Om oss+detectDentalSubsidyMentions",
           },
         ];
+      }
+      const freeCareMatches = detectFreeCareUnder19(aboutText);
+      if (freeCareMatches.length > 0) {
+        evidence.free_care_under_19 = freeCareMatches.map((match) => ({
+          value: match.value,
+          sourceUrl: fetched.url,
+          sourceType: this.sourceType,
+          confidence: 0.7,
+          evidenceText: match.matchedText,
+          retrievedAt: now,
+          extractionMethod: "dom-section:Om oss+detectFreeCareUnder19",
+        }));
       }
     }
 

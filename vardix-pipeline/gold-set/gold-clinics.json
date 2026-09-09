@@ -51,6 +51,7 @@
       "Implantat"
     ],
     "dentalSubsidy": "confirmed",
+    "free_care_under_19": null,
     "bookingUrl": null,
     "labelledFrom": [
       "https://adental.se/",
@@ -130,6 +131,7 @@
       "Implantat"
     ],
     "dentalSubsidy": "confirmed",
+    "free_care_under_19": false,
     "bookingUrl": "https://www.abbasdental.se/kontakt",
     "labelledFrom": [
       "https://www.abbasdental.se/",
@@ -193,6 +195,7 @@
       "Allmäntandvård"
     ],
     "dentalSubsidy": "not_found",
+    "free_care_under_19": null,
     "bookingUrl": null,
     "labelledFrom": [
       "https://bjuvstandvardsteam.se/"
@@ -251,6 +254,7 @@
       "Implantat"
     ],
     "dentalSubsidy": "not_found",
+    "free_care_under_19": null,
     "bookingUrl": null,
     "labelledFrom": [
       "https://www.1177.se/hitta-vard/kontaktkort/Fjarastandlakarn-Lindskogs-Tandland-AB-Kungsbacka/"
@@ -316,6 +320,7 @@
       "Akut tandvård"
     ],
     "dentalSubsidy": "not_found",
+    "free_care_under_19": null,
     "bookingUrl": "https://implantatkliniken.se/boka/",
     "labelledFrom": [
       "https://implantatkliniken.se/boka/",
@@ -381,6 +386,7 @@
       "Apnébehandling"
     ],
     "dentalSubsidy": "not_found",
+    "free_care_under_19": null,
     "bookingUrl": null,
     "labelledFrom": [
       "https://www.sveaparkstandlakarna.se/kontakt"
@@ -461,6 +467,7 @@
       "Tandvårdsrädsla"
     ],
     "dentalSubsidy": "confirmed",
+    "free_care_under_19": null,
     "bookingUrl": "https://citydental.se/en/contact-city-dental/",
     "labelledFrom": [
       "https://citydental.se/",
@@ -532,6 +539,7 @@
       "Kognitiv behandling av tandvårdsrädsla"
     ],
     "dentalSubsidy": "not_found",
+    "free_care_under_19": null,
     "bookingUrl": "https://ddental.opusdentalonline.com/",
     "labelledFrom": "https://d-dentalab.com/, https://d-dentalab.com/behandlingar/allmantandvard, https://d-dentalab.com/behandlingar/estetisk-tandvard, https://d-dentalab.com/behandlingar/akuttandvard",
     "labelledAt": "2026-09-05",
@@ -591,6 +599,7 @@
       "Tandextraktion"
     ],
     "dentalSubsidy": "Region Skåne",
+    "free_care_under_19": null,
     "bookingUrl": null,
     "labelledFrom": "https://www.1177.se/hitta-vard/kontaktkort/Bjuvs-Tandvardsteam-AB-Bjuv/, http://www.bjuvstandvardsteam.se",
     "labelledAt": "2026-09-05",
@@ -648,6 +657,7 @@
       "Tandimplantat"
     ],
     "dentalSubsidy": "Region Halland",
+    "free_care_under_19": null,
     "bookingUrl": null,
     "labelledFrom": "https://www.1177.se/hitta-vard/kontaktkort/Fjarastandlakarn-Lindskogs-Tandland-AB-Kungsbacka/, http://www.fjarastandlakarn.se",
     "labelledAt": "2026-09-05",
@@ -702,6 +712,7 @@
     },
     "services": [],
     "dentalSubsidy": "Region Stockholm",
+    "free_care_under_19": null,
     "bookingUrl": null,
     "labelledFrom": "https://www.1177.se/hitta-vard/kontaktkort/Implantatkliniken-Tandvard-Norrmalm/, http://implantatkliniken.se",
     "labelledAt": "2026-09-05",
@@ -760,6 +771,7 @@
       "Tandkirurgi"
     ],
     "dentalSubsidy": "Region Dalarna",
+    "free_care_under_19": null,
     "bookingUrl": null,
     "labelledFrom": "https://www.1177.se/hitta-vard/kontaktkort/Sveaparkens-Tandlakarklinik-Hedemora/, https://www.sveaparkstandlakarna.se",
     "labelledAt": "2026-09-05",
@@ -821,6 +833,7 @@
       "Tandimplantat"
     ],
     "dentalSubsidy": "Västra Götalandsregionen",
+    "free_care_under_19": null,
     "bookingUrl": null,
     "labelledFrom": "https://www.1177.se/hitta-vard/kontaktkort/Tandlakare-Juan-Aldin-Smart-Dentist-Goteborg-Goteborg/, https://www.smartdentist.se/",
     "labelledAt": "2026-09-05",
@@ -886,6 +899,7 @@
       "Apnébehandling"
     ],
     "dentalSubsidy": "Region Skåne",
+    "free_care_under_19": null,
     "bookingUrl": null,
     "labelledFrom": "https://www.1177.se/hitta-vard/kontaktkort/Helsingborgstandlakarna-Helsingborg/, https://helsingborgtandlakarna.se/",
     "labelledAt": "2026-09-05",
@@ -947,6 +961,7 @@
       "Tandvårdsrädsla"
     ],
     "dentalSubsidy": "Region Stockholm",
+    "free_care_under_19": true,
     "bookingUrl": null,
     "labelledFrom": "https://www.1177.se/hitta-vard/kontaktkort/Alviks-Strand-Tandlakarna-Bromma/, https://www.alviksstrandtandlakarna.se/",
     "labelledAt": "2026-09-05",
@@ -1005,6 +1020,7 @@
       "Tandblekning"
     ],
     "dentalSubsidy": "Region Värmland",
+    "free_care_under_19": null,
     "bookingUrl": null,
     "labelledFrom": "https://www.1177.se/Varmland/hitta-vard/kontaktkort/Charlottenbergs-Tandklinik-Charlottenberg/, http://www.charlottenbergs-tandklinik.se",
     "labelledAt": "2026-09-05",
@@ -1065,6 +1081,7 @@
       "Rotfyllning"
     ],
     "dentalSubsidy": "Region Stockholm",
+    "free_care_under_19": null,
     "bookingUrl": null,
     "labelledFrom": "https://www.varden.se/behandling/60836-bio-oral-dental-60836/27202-tandlakarundersokning, https://www.biooraldental.se/",
     "labelledAt": "2026-09-05",
@@ -1114,6 +1131,7 @@
     },
     "services": [],
     "dentalSubsidy": "Region Stockholm",
+    "free_care_under_19": null,
     "bookingUrl": null,
     "labelledFrom": "https://www.1177.se/hitta-vard/kontaktkort/Agea-Dental-Nasby-Park-centrum-Taby/, http://www.ageadental.se",
     "labelledAt": "2026-09-05",
@@ -1169,6 +1187,7 @@
       "Sömnapnébehandling"
     ],
     "dentalSubsidy": "Region Uppsala",
+    "free_care_under_19": null,
     "bookingUrl": "https://boka.frenda.se/349191",
     "labelledFrom": "https://www.1177.se/hitta-vard/kontaktkort/City-Tandvard-Uppsala/, https://www.citytandvard.se/",
     "labelledAt": "2026-09-05",
@@ -1236,6 +1255,7 @@
       "Akut tandvård"
     ],
     "dentalSubsidy": "Region Stockholm",
+    "free_care_under_19": null,
     "bookingUrl": null,
     "labelledFrom": "https://www.1177.se/hitta-vard/kontaktkort/Akuttandvarden-Tensta-Spanga/, https://atvtensta.eu/",
     "labelledAt": "2026-09-05",
@@ -1292,6 +1312,7 @@
       "Dermatology"
     ],
     "dentalSubsidy": "not_applicable",
+    "free_care_under_19": null,
     "bookingUrl": null,
     "labelledFrom": "https://www.1177.se/hitta-vard/kontaktkort/Boras-Hudlakarmottagning-Apostolos-Parisopoulos-Boras/, https://borashudlakarmottagning.nu/",
     "labelledAt": "2026-09-05",
@@ -1346,6 +1367,7 @@
     },
     "services": [],
     "dentalSubsidy": "Region Uppsala",
+    "free_care_under_19": null,
     "bookingUrl": null,
     "labelledFrom": "https://www.1177.se/hitta-vard/kontaktkort/AN-Tandvard-Osterbybruk/, https://antandvard.se/",
     "labelledAt": "2026-09-05",
@@ -1405,6 +1427,7 @@
       "Tandvård under narkos"
     ],
     "dentalSubsidy": "Region Stockholm",
+    "free_care_under_19": null,
     "bookingUrl": null,
     "labelledFrom": "https://www.1177.se/hitta-vard/kontaktkort/Bene-Tandvard-Ostermalm/, https://benetandvard.se/",
     "labelledAt": "2026-09-05",
@@ -1457,6 +1480,7 @@
       "Akut tandvård"
     ],
     "dentalSubsidy": "not_found",
+    "free_care_under_19": null,
     "bookingUrl": null,
     "labelledFrom": "https://www.1177.se/hitta-vard/kontaktkort/Bergshamratandlakarna-Maria-Mustonen-Solna/",
     "labelledAt": "2026-09-05",
@@ -1515,6 +1539,7 @@
       "Rotfyllning"
     ],
     "dentalSubsidy": "not_found",
+    "free_care_under_19": null,
     "bookingUrl": null,
     "labelledFrom": "https://www.1177.se/Orebrolan/hitta-vard/kontaktkort/Brotandlakarna/, https://brotandlakarna.se/, https://www.eniro.se/brotandl%C3%A4karna%2Bstockholm%2Bab%2Bbro/156355410/firma",
     "labelledAt": "2026-09-05",
@@ -1577,6 +1602,7 @@
       "Akut tandvård"
     ],
     "dentalSubsidy": "not_found",
+    "free_care_under_19": null,
     "bookingUrl": null,
     "labelledFrom": "https://www.allabolag.se/foretag/dental-human-holding-ab/degeberga/tandl%C3%A4kare/2KITUYNI63IKS, https://arbetsformedlingen.se/Platsbanken/annonser/31073458, https://www.doktorn.com/vardgivare/dental-human-i-klintehamn-ab-degeberga/, https://diabetes.nu/vardgivare/dental-human-i-klintehamn-ab-degeberga/",
     "labelledAt": "2026-09-05",

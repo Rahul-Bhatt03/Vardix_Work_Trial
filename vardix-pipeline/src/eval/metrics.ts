@@ -61,7 +61,7 @@ function normalizeUrl(value: string): string {
   }
 }
 
-function scalarMatch(gold: string | null, actual: string | null, equals: (a: string, b: string) => boolean): "tp" | "fp" | "fn" | "fp+fn" | "tn" {
+function scalarMatch<T>(gold: T | null, actual: T | null, equals: (a: T, b: T) => boolean): "tp" | "fp" | "fn" | "fp+fn" | "tn" {
   if (gold === null && actual === null) return "tn";
   if (gold === null && actual !== null) return "fp";
   if (gold !== null && actual === null) return "fn";
@@ -115,6 +115,11 @@ function recordUnmatchedGold(gold: GoldClinic, metrics: Record<string, FieldMetr
     metrics.dentalSubsidy!.goldCount++;
     metrics.dentalSubsidy!.falseNegative++;
   }
+
+  if (gold.free_care_under_19 !== null) {
+    metrics.free_care_under_19!.goldCount++;
+    metrics.free_care_under_19!.falseNegative++;
+  }
 }
 
 export function runGoldSetEvaluation(goldSet: GoldClinic[], resolvedClinics: ResolvedClinic[]): GoldSetEvalReport {
@@ -127,6 +132,7 @@ export function runGoldSetEvaluation(goldSet: GoldClinic[], resolvedClinics: Res
     openingHours: emptyMetric("openingHours"),
     services: emptyMetric("services"),
     dentalSubsidy: emptyMetric("dentalSubsidy"),
+    free_care_under_19: emptyMetric("free_care_under_19"),
     bookingUrl: emptyMetric("bookingUrl"),
   };
 
@@ -204,6 +210,9 @@ export function runGoldSetEvaluation(goldSet: GoldClinic[], resolvedClinics: Res
     const actualSubsidy = actualSubsidyRaw === "unknown" ? null : actualSubsidyRaw;
     if (goldSubsidy !== null) metrics.dentalSubsidy!.goldCount++;
     tally(scalarMatch(goldSubsidy, actualSubsidy, (a, b) => a === b), metrics.dentalSubsidy!);
+
+    if (gold.free_care_under_19 !== null) metrics.free_care_under_19!.goldCount++;
+    tally(scalarMatch(gold.free_care_under_19, actual.fields.free_care_under_19.value, (a, b) => a === b), metrics.free_care_under_19!);
 
     // Services: multi-label set. Each gold service is its own TP/FN;
     // each predicted service not in gold is its own FP. This is scored

@@ -7,6 +7,7 @@ import { extractOrgNoCandidates } from "../extract/orgno.js";
 import { parseOpeningHours, parseStructuredOpeningHours } from "../extract/hours.js";
 import { matchServices } from "../extract/services.js";
 import { detectDentalSubsidyMentions } from "../extract/subsidy.js";
+import { detectFreeCareUnder19 } from "../extract/free-care.js";
 import { pickBestBookingLink, type LinkCandidate } from "../extract/booking.js";
 
 // The clinic's own website is the one source every seed row has, so it
@@ -286,6 +287,19 @@ export class WebsiteSource implements Source {
           extractionMethod: "regex:detectDentalSubsidyMentions",
         },
       ];
+    }
+
+    const freeCareMatches = detectFreeCareUnder19(bodyText);
+    if (freeCareMatches.length > 0) {
+      evidence.free_care_under_19 = freeCareMatches.map((match) => ({
+        value: match.value,
+        sourceUrl: fetched.url,
+        sourceType: this.sourceType,
+        confidence: 0.6,
+        evidenceText: match.matchedText,
+        retrievedAt: now,
+        extractionMethod: "regex:detectFreeCareUnder19",
+      }));
     }
 
     // --- Booking link

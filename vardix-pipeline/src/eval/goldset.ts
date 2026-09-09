@@ -25,6 +25,7 @@ export interface GoldClinic {
   openingHours: GoldOpeningHours | null;
   services: string[] | null; // canonical service names, from the same vocabulary as src/extract/services.ts where possible
   dentalSubsidy: "confirmed" | "not_found" | "conflicting" | "unknown" | null;
+  free_care_under_19: boolean | null;
   bookingUrl: string | null;
   /** How/where the labeller verified this row. Required — an unlabelled source is not a real gold row. */
   labelledFrom: string | string[];

@@ -47,6 +47,9 @@ export function resolveClinicFields(rawEvidenceList: RawEvidence[]): ResolvedCli
       describe: (v) => v.join(", "),
     }),
     dentalSubsidy: resolveDentalSubsidy(collect<DentalSubsidyValue>(rawEvidenceList, "dentalSubsidy")),
+    free_care_under_19: resolveField<boolean>(collect(rawEvidenceList, "free_care_under_19"), {
+      equals: (a, b) => a === b,
+    }),
     bookingUrl: resolveField(collect<string>(rawEvidenceList, "bookingUrl"), { equals: urlEquals }),
   };
 }
