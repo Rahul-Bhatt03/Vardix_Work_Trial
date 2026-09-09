@@ -1,6 +1,10 @@
 node_modules/
 dist/
 output/*
+!output/clinics.json
+!output/eval-report.json
+!output/quality-report.json
+!output/run-report.json
 !output/.gitkeep
 !output/sample/
 *.log
