@@ -13,6 +13,7 @@ function emptyFields() {
     openingHours: { ...empty },
     services: { ...empty },
     dentalSubsidy: { value: { status: "unknown" as const }, confidence: 0, conflict: false, evidence: [] },
+    free_care_under_19: { ...empty },
     bookingUrl: { ...empty },
   };
 }

@@ -14,6 +14,7 @@ function emptyFields() {
     openingHours: { ...empty },
     services: { ...empty, value: [] as string[] },
     dentalSubsidy: { value: { status: "unknown" as const }, confidence: 0, conflict: false, evidence: [] },
+    free_care_under_19: { ...empty },
     bookingUrl: { ...empty },
   };
 }
@@ -30,6 +31,7 @@ function goldRow(overrides: Partial<GoldClinic> = {}): GoldClinic {
     openingHours: null,
     services: null,
     dentalSubsidy: null,
+    free_care_under_19: null,
     bookingUrl: null,
     labelledFrom: "manual check",
     labelledAt: "2026-09-04",
@@ -48,6 +50,23 @@ function resolvedRow(id: string, overrides: Partial<ResolvedClinic["fields"]> = 
 }
 
 describe("runGoldSetEvaluation — scalar field null-handling", () => {
+  it("scores free-care booleans with the shared precision and recall contract", () => {
+    const gold = [
+      goldRow({ clinicId: "c1", free_care_under_19: true }),
+      goldRow({ clinicId: "c2", free_care_under_19: false }),
+    ];
+    const actual = [
+      resolvedRow("c1", { free_care_under_19: { value: true, confidence: 0.8, conflict: false, evidence: [] } }),
+      resolvedRow("c2", { free_care_under_19: { value: true, confidence: 0.8, conflict: false, evidence: [] } }),
+    ];
+    const metric = runGoldSetEvaluation(gold, actual).perField.find((field) => field.field === "free_care_under_19")!;
+    expect(metric.truePositive).toBe(1);
+    expect(metric.falsePositive).toBe(1);
+    expect(metric.falseNegative).toBe(1);
+    expect(metric.precision).toBe(0.5);
+    expect(metric.recall).toBe(0.5);
+  });
+
   it("counts a correct match as a true positive contributing to both precision and recall", () => {
     const gold = [goldRow({ phone: "+46812345678" })];
     const actual = [resolvedRow("c1", { phone: { value: "+46812345678", confidence: 0.8, conflict: false, evidence: [] } })];

@@ -51,6 +51,7 @@ const FIELD_NAMES = [
   "openingHours",
   "services",
   "dentalSubsidy",
+  "free_care_under_19",
   "bookingUrl",
 ] as const;
 

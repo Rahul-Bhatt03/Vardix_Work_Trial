@@ -17,6 +17,7 @@ export type FieldName =
     | "openingHours"
     | "services"
     | "dentalSubsidy"
+    | "free_care_under_19"
     | "bookingUrl";
 
 
@@ -87,6 +88,7 @@ export interface ResolvedClinicFields {
   openingHours: ResolvedField<OpeningHoursValue>;
   services: ResolvedField<string[]>;
   dentalSubsidy: ResolvedField<DentalSubsidyValue>;
+  free_care_under_19: ResolvedField<boolean>;
   bookingUrl: ResolvedField<string>;
 }
 

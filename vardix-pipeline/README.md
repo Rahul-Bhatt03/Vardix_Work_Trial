@@ -3,7 +3,8 @@
 An evidence-first data pipeline that resolves facts about ~300 Swedish
 dental and skin clinics — canonical name, organisation number, visiting
 address, phone, email, opening hours, services offered, state dental
-subsidy connection, and an online booking URL — from public sources.
+subsidy connection, free dental care for patients under 19, and an online
+booking URL — from public sources.
 
 Every field carries its source URL, a confidence score, and a conflict
 flag when sources disagree. A field the pipeline could not verify is
@@ -31,7 +32,7 @@ seed-clinics.csv
   (clinic website, 1177.se).
 - `src/extract/` — deterministic Swedish-aware extractors: phone, org
   number (Luhn-validated), opening hours, address, booking-link scoring,
-  dental-subsidy detection, and a service vocabulary matcher.
+  dental-subsidy and free-under-19 detection, and a service vocabulary matcher.
 - `src/resolve/` — cross-source conflict detection and confidence merging.
 - `src/pipeline.ts` — orchestrates the above per clinic; never lets one
   bad clinic or source take down the run.
